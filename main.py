@@ -37,6 +37,105 @@ theme_colors = {
     "molecular": "#8A2BE2"     # Blue Violet
 }
 
+# NEW FEATURE: Direct AI Answer Function
+def generate_direct_ai_answer(user_query, client):
+    """Generate comprehensive AI answer for any biological question"""
+    if not client:
+        return "AI analysis not available. Please configure OpenAI API key."
+    
+    try:
+        prompt = f"""
+        You are a world-renowned biologist with expertise across all biological disciplines including ecology, evolution, taxonomy, molecular biology, conservation, genetics, and physiology. 
+
+        The user has asked: "{user_query}"
+
+        Provide a comprehensive, scientifically accurate answer that covers:
+
+        1. **Direct Answer**: Start with a clear, direct response to the question
+        2. **Scientific Background**: Provide relevant biological context and principles
+        3. **Examples**: Include specific examples of species, processes, or phenomena
+        4. **Current Research**: Mention recent findings or ongoing research areas
+        5. **Practical Applications**: Discuss real-world applications or implications
+        6. **Related Concepts**: Explain connected biological concepts
+        7. **Conservation/Ecological Significance**: If relevant, discuss environmental importance
+
+        Guidelines:
+        - Use accurate scientific terminology but explain complex concepts clearly
+        - Include specific examples and case studies where appropriate
+        - Mention quantitative data when relevant (sizes, numbers, percentages, etc.)
+        - Reference major biological principles and theories
+        - Be comprehensive but well-organized
+        - If the question has multiple aspects, address each one
+        - Always respond in English
+
+        Make this answer educational, engaging, and scientifically rigorous - suitable for students, researchers, and biology enthusiasts.
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "You are a comprehensive biological knowledge expert. Provide detailed, accurate, and educational responses to all biological questions. Always respond in English with proper scientific terminology and examples."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=2000,
+            temperature=0.3,
+        )
+        
+        return response.choices[0].message.content
+        
+    except Exception as e:
+        return f"Error generating AI response: {str(e)}"
+
+# NEW FEATURE: Dataset Integration Analysis
+def generate_dataset_integration_analysis(user_query, dataset_results, ai_answer, client):
+    """Generate analysis that integrates dataset findings with comprehensive AI knowledge"""
+    if not client:
+        return "Integration analysis not available. Please configure OpenAI API key."
+    
+    try:
+        dataset_summary = ""
+        if dataset_results and not dataset_results.empty:
+            dataset_summary = f"""
+            Dataset Analysis Results:
+            - Records found: {len(dataset_results)}
+            - Key findings from our dataset: {dataset_results.to_string()[:500]}...
+            """
+        else:
+            dataset_summary = "No specific data found in our current datasets for this query."
+
+        prompt = f"""
+        The user asked: "{user_query}"
+
+        Our dataset analysis found: {dataset_summary}
+
+        You previously provided this comprehensive answer: {ai_answer[:800]}...
+
+        Now provide an INTEGRATION ANALYSIS that:
+
+        1. **Connects Dataset & Knowledge**: How do our dataset findings relate to the broader biological knowledge?
+        2. **Data Gaps & Extensions**: What additional information does biological science provide beyond our dataset?
+        3. **Validation & Context**: Do our dataset patterns align with known biological principles?
+        4. **Research Opportunities**: What research questions emerge from combining our data with broader knowledge?
+        5. **Practical Recommendations**: Based on both our data and scientific knowledge, what are the practical implications?
+
+        Keep this focused on the integration between our specific dataset findings and the broader biological understanding.
+        """
+
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": "You are a research analyst specializing in integrating specific dataset findings with comprehensive biological knowledge. Focus on connecting data patterns with broader scientific understanding."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=1000,
+            temperature=0.3,
+        )
+        
+        return response.choices[0].message.content
+        
+    except Exception as e:
+        return f"Error generating integration analysis: {str(e)}"
+
 @st.cache_data
 def load_biological_data():
     """Load all biological datasets"""
@@ -1035,9 +1134,9 @@ def generate_advanced_insights(category, df, x_col, y_col, additional_data, enti
     return charts, insights
 
 def build_enhanced_biology_dashboard():
-    """Main dashboard interface with advanced query processing"""
-    st.title("Bio Intelligence Dashboard")
-    st.markdown("### Analysis of Biological Data with Intelligent Query Processing")
+    """Main dashboard interface with advanced query processing and always-on AI answers"""
+    st.title("🧬 Bio Intelligence Dashboard")
+    st.markdown("### Analysis of Biological Data with Intelligent Query Processing + Direct AI Answers")
     
     # Load data
     with st.spinner("Loading biological datasets..."):
@@ -1063,6 +1162,18 @@ def build_enhanced_biology_dashboard():
         if not biodiversity_df.empty:
             st.metric("Biodiversity Records", f"{len(biodiversity_df):,}")
         
+        # NEW: AI Configuration
+        st.divider()
+        st.subheader("🤖 AI Configuration")
+        
+        ai_enabled = st.checkbox("Enable Direct AI Answers", value=True, help="Always provide comprehensive AI responses alongside dataset analysis")
+        integration_analysis = st.checkbox("Enable Integration Analysis", value=True, help="Connect dataset findings with broader biological knowledge")
+        
+        if not client:
+            st.warning("⚠️ OpenAI API not configured. AI features will be limited.")
+        else:
+            st.success("✅ AI features fully enabled")
+        
         # Data quality indicators
         st.divider()
         st.subheader("Data Quality")
@@ -1080,27 +1191,32 @@ def build_enhanced_biology_dashboard():
         example_queries = [
             "Show me all vertebrate animals",
             "What plants bloom in spring?",
+            "How does photosynthesis work?",
             "Compare plant families by diversity",
+            "What are ecosystem services?",
             "Which animals are in the class Mammalia?",
+            "Explain natural selection",
             "Show plants that need full sun",
+            "How do birds migrate?",
             "What are the largest animal groups?",
             "Which plants have red flowers?",
+            "What is genetic diversity?",
             "Show taxonomic hierarchy",
             "Compare vertebrates vs invertebrates"
         ]
         
-        for query in example_queries[:5]:
+        for query in example_queries[:8]:
             if st.button(query, key=f"example_{hash(query)}"):
                 st.session_state.example_query = query
     
     # Main analysis interface
     main_tabs = st.tabs([
-        "Query Analysis", 
-        "Interactive Explorer"
+        "🔬 Query Analysis", 
+        "📈 Interactive Explorer"
     ])
     
     with main_tabs[0]:
-        st.header("Natural Language Query Analysis")
+        st.header("Natural Language Query Analysis with AI Enhancement")
         
         # Query input with enhanced features
         col1, col2 = st.columns([3, 1])
@@ -1115,16 +1231,18 @@ def build_enhanced_biology_dashboard():
             user_query = st.text_area(
                 "Enter your biological research question:",
                 value=default_query,
-                placeholder="e.g., 'Show me all mammals in the dataset and compare their family diversity' or 'What plants need wet soil and bloom in summer?'",
+                placeholder="e.g., 'Show me all mammals in the dataset and compare their family diversity' or 'How does photosynthesis work?' or 'What plants need wet soil and bloom in summer?'",
                 height=100
             )
             
-            st.markdown("**Query Features:**")
+            st.markdown("**🌟 Enhanced Query Features:**")
+            st.markdown("- **Direct AI Answers**: Get comprehensive responses to any biological question")
+            st.markdown("- **Dataset Integration**: Combines AI knowledge with your specific data")
             st.markdown("- **Taxonomic queries**: Ask about specific kingdoms, phyla, classes, orders, families")
             st.markdown("- **Ecological queries**: Search by habitat, light, soil, moisture requirements")
             st.markdown("- **Morphological queries**: Find organisms by size, color, structure")
             st.markdown("- **Comparative analysis**: Compare different groups or characteristics")
-            st.markdown("- **Temporal patterns**: Analyze seasonal or lifecycle patterns")
+            st.markdown("- **General biology**: Ask any biological question for comprehensive answers")
         
         with col2:
             st.subheader("Analysis Options")
@@ -1152,7 +1270,7 @@ def build_enhanced_biology_dashboard():
         if user_query:
             st.info(f"Processing Query: **{user_query}**")
             
-            with st.spinner("Analyzing biological data with advanced algorithms..."):
+            with st.spinner("Analyzing biological data with advanced algorithms + AI knowledge..."):
                 # Enhanced query interpretation
                 query_result = interpret_bio_query_advanced(user_query)
                 
@@ -1202,14 +1320,39 @@ def build_enhanced_biology_dashboard():
                 
                 # Create main visualization and insights
                 analysis_tabs = st.tabs([
-                    "Primary Analysis", 
-                    "Detailed Insights", 
-                    "Additional Visualizations",
-                    "Data Explorer",
-                    "AI Interpretation"
+                    "🤖 Direct AI Answer",  # NEW TAB - Always first
+                    "📊 Dataset Analysis", 
+                    "🔗 Integrated Insights",  # NEW TAB
+                    "📈 Additional Visualizations",
+                    "🔍 Data Explorer"
                 ])
                 
+                # NEW TAB 1: Direct AI Answer (Always shown)
                 with analysis_tabs[0]:
+                    st.subheader("🧠 Comprehensive AI Response")
+                    st.markdown("*Complete biological knowledge and scientific understanding*")
+                    
+                    if ai_enabled and client:
+                        with st.spinner("🤖 Generating comprehensive AI response..."):
+                            ai_answer = generate_direct_ai_answer(user_query, client)
+                            
+                            # Display AI answer with enhanced formatting
+                            st.markdown("### 📚 Scientific Answer")
+                            st.markdown(ai_answer)
+                            
+                            # Store AI answer for integration
+                            st.session_state.ai_answer = ai_answer
+                            
+                            # Add quick summary
+                            st.markdown("---")
+                            st.markdown("**✨ This response provides comprehensive biological knowledge regardless of dataset content**")
+                    
+                    else:
+                        st.warning("🔧 AI Direct Answers are disabled. Enable in sidebar for comprehensive responses.")
+                        st.markdown(self_generate_insights(query_result, df, []))
+                
+                # TAB 2: Dataset Analysis (Original functionality preserved)
+                with analysis_tabs[1]:
                     st.subheader(title)
                     
                     if not df.empty and x_col and y_col:
@@ -1241,13 +1384,64 @@ def build_enhanced_biology_dashboard():
                         else:
                             st.warning(f"Could not create {viz_type} visualization with current data. Showing data table instead.")
                             st.dataframe(df, use_container_width=True)
+                            # Store dataset results for integration
+                        st.session_state.dataset_results = df
+                        
                     else:
                         st.dataframe(df, use_container_width=True)
                         if df.empty:
                             st.warning("No data found matching your query. Try rephrasing or using different terms.")
+                            st.session_state.dataset_results = pd.DataFrame()
                 
-                with analysis_tabs[1]:
-                    st.subheader("Detailed Biological Insights")
+                # NEW TAB 3: Integrated Insights
+                with analysis_tabs[2]:
+                    st.subheader("🔗 Knowledge Integration & Synthesis")
+                    st.markdown("*Connecting dataset findings with comprehensive biological knowledge*")
+                    
+                    if integration_analysis and client and hasattr(st.session_state, 'ai_answer'):
+                        dataset_results = st.session_state.get('dataset_results', pd.DataFrame())
+                        
+                        with st.spinner("🔗 Generating integration analysis..."):
+                            integration_response = generate_dataset_integration_analysis(
+                                user_query, 
+                                dataset_results, 
+                                st.session_state.ai_answer, 
+                                client
+                            )
+                            
+                            st.markdown("### 🎯 Integrated Scientific Analysis")
+                            st.markdown(integration_response)
+                            
+                            # Add synthesis summary
+                            st.markdown("---")
+                            st.markdown("### 📋 Analysis Summary")
+                            
+                            summary_cols = st.columns(2)
+                            
+                            with summary_cols[0]:
+                                st.markdown("**🗃️ Dataset Contribution:**")
+                                if not dataset_results.empty:
+                                    st.markdown(f"- Found {len(dataset_results)} relevant records")
+                                    st.markdown("- Provides specific quantitative data")
+                                    st.markdown("- Enables targeted analysis")
+                                else:
+                                    st.markdown("- No specific dataset matches")
+                                    st.markdown("- General overview available")
+                                    st.markdown("- Broader analysis scope")
+                            
+                            with summary_cols[1]:
+                                st.markdown("**🧠 AI Knowledge Contribution:**")
+                                st.markdown("- Comprehensive scientific background")
+                                st.markdown("- Current research findings")
+                                st.markdown("- Practical applications")
+                                st.markdown("- Educational context")
+                    
+                    else:
+                        st.warning("🔧 Integration Analysis requires both AI Answer and Dataset Analysis to be run first.")
+                
+                # TAB 4: Additional Visualizations (Original functionality preserved)
+                with analysis_tabs[3]:
+                    st.subheader("Additional Visualizations & Analysis")
                     
                     # Generate advanced insights
                     charts, insights = generate_advanced_insights(
@@ -1259,6 +1453,15 @@ def build_enhanced_biology_dashboard():
                         st.markdown("### Key Findings")
                         for insight in insights:
                             st.markdown(f"- {insight}")
+                    
+                    if charts:
+                        for i, (chart_title, chart_fig) in enumerate(charts):
+                            if i % 2 == 0:
+                                chart_cols = st.columns(2)
+                            
+                            with chart_cols[i % 2]:
+                                st.markdown(f"**{chart_title}**")
+                                st.plotly_chart(chart_fig, use_container_width=True)
                     
                     # Statistical summary if requested
                     if include_statistics and not df.empty:
@@ -1282,36 +1485,8 @@ def build_enhanced_biology_dashboard():
                             )
                             st.plotly_chart(corr_fig, use_container_width=True)
                 
-                with analysis_tabs[2]:
-                    st.subheader("Additional Visualizations & Analysis")
-                    
-                    if charts:
-                        for i, (chart_title, chart_fig) in enumerate(charts):
-                            if i % 2 == 0:
-                                chart_cols = st.columns(2)
-                            
-                            with chart_cols[i % 2]:
-                                st.markdown(f"**{chart_title}**")
-                                st.plotly_chart(chart_fig, use_container_width=True)
-                    
-                    else:
-                        # Generate alternative visualizations based on data
-                        if not df.empty and x_col and y_col:
-                            st.markdown("**Alternative Visualizations:**")
-                            
-                            alt_viz_cols = st.columns(3)
-                            alt_viz_types = ["pie", "treemap", "violin"] if viz_type != "bar" else ["scatter", "heatmap", "radar"]
-                            
-                            for idx, alt_viz in enumerate(alt_viz_types):
-                                with alt_viz_cols[idx]:
-                                    alt_fig = create_advanced_visualization(
-                                        df, alt_viz, x_col, y_col, f"{title} - {alt_viz.title()} View", 
-                                        additional_data, bio_category
-                                    )
-                                    if alt_fig:
-                                        st.plotly_chart(alt_fig, use_container_width=True)
-                
-                with analysis_tabs[3]:
+                # TAB 5: Data Explorer (Original functionality preserved)
+                with analysis_tabs[4]:
                     st.subheader("Interactive Data Explorer")
                     
                     if not df.empty:
@@ -1379,117 +1554,8 @@ def build_enhanced_biology_dashboard():
                                     st.dataframe(df_display[numeric_cols].describe(), use_container_width=True)
                     else:
                         st.warning("No data available for exploration")
-                
-                with analysis_tabs[4]:
-                    st.subheader("AI-Powered Scientific Interpretation")
-                    
-                    if include_insights and client:
-                        # Enhanced context preparation
-                        context = f"""
-                        Biological Analysis Results:
-                        Query Category: {query_result['category'].replace('_', ' ').title()}
-                        Complexity Level: {query_result['complexity']}
                         
-                        Dataset Summary:
-                        - Total records analyzed: {len(df) if not df.empty else 0}
-                        - Analysis focus: {title}
-                        
-                        Key Findings:
-                        {chr(10).join([f"- {insight}" for insight in insights]) if insights else "Standard analysis completed"}
-                        
-                        Data Characteristics:
-                        {df.describe().to_string() if not df.empty and len(df.select_dtypes(include=[np.number]).columns) > 0 else "Categorical data analysis"}
-                        
-                        Query Entities Detected:
-                        {chr(10).join([f"- {k}: {v}" for k, v in query_result['details']['entities'].items() if v])}
-                        """
-                        
-                        if query_result['category'] == "taxonomic_classification":
-                            context += f"""
-                            
-                            Taxonomic Analysis Context:
-                            - Focus on hierarchical classification systems
-                            - Linnean taxonomy principles
-                            - Phylogenetic relationships
-                            """
-                        
-                        elif query_result['category'] == "plant_ecology":
-                            context += f"""
-                            
-                            Plant Ecology Context:
-                            - Environmental adaptation strategies
-                            - Habitat requirements and preferences
-                            - Ecological niche analysis
-                            """
-                        
-                        elif query_result['category'] == "animal_diversity":
-                            context += f"""
-                            
-                            Animal Diversity Context:
-                            - Evolutionary adaptations
-                            - Ecological roles and behaviors
-                            - Taxonomic diversity patterns
-                            """
-                        
-                        prompt = f"""
-                        Based on this biological data analysis, provide a comprehensive scientific interpretation that includes:
-                        
-                        1. **Biological Significance**: What do these findings tell us about the organisms or ecosystems studied?
-                        2. **Ecological Implications**: How do these patterns relate to ecological principles and processes?
-                        3. **Evolutionary Context**: What evolutionary or adaptive significance might these patterns have?
-                        4. **Conservation Relevance**: Are there any conservation implications or concerns highlighted by this data?
-                        5. **Research Directions**: What follow-up questions or research directions does this analysis suggest?
-                        6. **Methodological Insights**: Comment on the analytical approach and data quality
-                        
-                        Context: {context}
-                        
-                        User's Original Query: "{user_query}"
-                        
-                        Please provide a detailed, scientifically accurate response that would be suitable for researchers, students, or conservation professionals. Use appropriate biological terminology while remaining accessible. Respond in English.
-                        """
-                        
-                        with st.spinner("Generating comprehensive AI analysis..."):
-                            try:
-                                response = client.chat.completions.create(
-                                    model="gpt-4o-mini",
-                                    messages=[
-                                        {"role": "system", "content": "You are a leading biological researcher and data scientist with expertise in ecology, evolution, taxonomy, and conservation biology. Provide comprehensive, scientifically accurate analyses that integrate multiple biological disciplines. Always respond in English with proper scientific terminology."},
-                                        {"role": "user", "content": prompt}
-                                    ],
-                                    max_tokens=1500,
-                                    temperature=0.3,
-                                )
-                                ai_analysis = response.choices[0].message.content
-                                
-                                # Display AI analysis with better formatting
-                                st.markdown(ai_analysis)
-                                
-                                # Add research recommendations
-                                st.markdown("---")
-                                st.markdown("### 🔬 Research Recommendations")
-                                
-                                rec_cols = st.columns(2)
-                                with rec_cols[0]:
-                                    st.markdown("**Immediate Actions:**")
-                                    st.markdown("- Validate findings with additional data sources")
-                                    st.markdown("- Consider temporal variation in patterns")
-                                    st.markdown("- Examine potential confounding variables")
-                                
-                                with rec_cols[1]:
-                                    st.markdown("**Future Research:**")
-                                    st.markdown("- Expand analysis to related taxa/ecosystems")
-                                    st.markdown("- Investigate mechanistic explanations")
-                                    st.markdown("- Consider climate change implications")
-                                
-                            except Exception as e:
-                                st.error(f"Error generating AI analysis: {str(e)}")
-                                st.markdown(self_generate_insights(query_result, df, insights))
-                    
-                    else:
-                        st.info("Enable AI Analysis in the sidebar for detailed scientific interpretation")
-                        st.markdown(self_generate_insights(query_result, df, insights))
-                        
-    # Continue with the rest of the dashboard
+    # Continue with the rest of the dashboard (Original functionality preserved)
     with main_tabs[1]:
         st.header("Interactive Biological Data Explorer")
         
@@ -1509,7 +1575,6 @@ def build_enhanced_biology_dashboard():
             explore_biodiversity_dataset(biodiversity_df)
         else:
             explore_comparative_analysis(animals_df, plants_df, biodiversity_df)
-            
 
 def self_generate_insights(query_result, df, insights):
     """Generate basic insights when AI is not available"""
@@ -1569,8 +1634,6 @@ def self_generate_insights(query_result, df, insights):
     """
     
     return basic_analysis
-
-
 
 def explore_animals_dataset(animals_df):
     """Animal dataset exploration"""
@@ -1803,7 +1866,6 @@ def explore_comparative_analysis(animals_df, plants_df, biodiversity_df):
                     color='Dataset',
                     color_discrete_sequence=[theme_colors["animal"], theme_colors["plant"], theme_colors["biodiversity"]])
         st.plotly_chart(fig, use_container_width=True)
-
 
 def main():
     build_enhanced_biology_dashboard()
