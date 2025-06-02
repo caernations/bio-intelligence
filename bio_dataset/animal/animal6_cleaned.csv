@@ -1,0 +1,961 @@
+kingdom,phylum,class,order,family,genus,scientific_name
+Animalia,Chordata,Mammalia,Tubulidentata,Orycteropodidae,Orycteropus,Orycteropus afer
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Addax,Addax nasomaculatus
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Pygoscelis,Pygoscelis adeliae
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Amphibia,Anura,Pyxicephalidae,Pyxicephalus,Pyxicephalus adspersus
+Animalia,Chordata,Mammalia,Proboscidea,Elephantidae,Loxodonta,Loxodonta africana africana
+Animalia,Chordata,Mammalia,Carnivora,Viverridae,Civettictis,Civettictis civetta
+Animalia,Chordata,Amphibia,Anura,Pipidae,Xenopus,Xenopus laevis
+Animalia,Chordata,Mammalia,Proboscidea,Elephantidae,Loxodonta,Loxodonta cyclotis
+Animalia,Chordata,Aves,Psittaciformes,Psittacidae,Psittacus,Psittacus erithacus
+Animalia,Chordata,Mammalia,Carnivora,Nandiniidae,Nandinia,Nandinia binotata
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Spheniscus,Spheniscus demersus
+Animalia,Chordata,Amphibia,Anura,Bufonidae,Nectophryne,Nectophryne afra
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Lycaon,Lycaon pictus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Scombriformes,Scombridae,Thunnus,Thunnus alalunga
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Geochelone,Geochelone gigantea
+Animalia,Chordata,Reptilia,Crocodilia,Alligatoridae,Alligator,Alligator mississippiensis
+Animalia,Chordata,Actinopterygii,Lepisosteiformes,Lepisosteidae,Atractosteus,Atractosteus spatula
+Animalia,Chordata,Mammalia,Artiodactyla,Camelidae,Vicugna,Vicugna pacos
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Arthropoda,Insecta,Blattodea,Blattidae,Periplaneta,Periplaneta americana
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Turdus Linnaeus,Turdus migratorius
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Amphibia,Anura,Bufonidae,Anaxyrus,Anaxyrus americanus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera pardus orientalis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Annelida,Polychaeta,Phyllodocida,Polynoidae,Eulagisca,Eulagisca gigantea
+Animalia,Chordata,Mammalia,Xenarthra,Myrmecophagidae,Tamandua,Myrmecophaga Tridactyla
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,Vulpes lagopus
+Animalia,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,Lepus Arcticus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canus Lupus Arcticus
+Animalia,Arthropoda,Arachnida,Scorpiones,Buthidae,Centruriodes,Centruroides sculpturatus
+Animalia,Chordata,Mammalia,Cingulata,Dasypodidae,Dasypus,Dasypodidae
+Animalia,Arthropoda,Insecta,Lepidoptera,Noctuidae,Mythimna,Mythimna unipuncta
+Animalia,Chordata,Mammalia,Proboscidea,Elephantidae,Elephas,Elephas maximus
+Animalia,Arthropoda,Insecta,Hymenoptera,Vespidae,Vespa,Vespa mandarinia
+Animalia,Chordata,Mammalia,Carnivora,Viverridae,Paradoxurus,Paradoxurus hermaphroditus
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Ursus,Ursus tibetanus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Hemichordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Aves,Charadriiformes,Recurvirostridae,Recurvirostra,Recurvirostra
+Animalia,Chordata,Amphibia,Caudata,Ambystomatidae,Ambystoma,Ambystoma mexicanum
+Animalia,Chordata,Mammalia,Primates,Daubentoniidae,Daubentonia,Daubentonia madagascariensis
+Animalia,Chordata,Mammalia,Primates,Cercopithecidae,Papio,Papio
+Animalia,Chordata,Mammalia,Artiodactyla,Camelidae,Camelus,Camelus Bactrianus
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Taxidiinae,Taxidea Taxus
+Animalia,Chordata,Mammalia,Cetartiodactyla,Lipotidae,Liptodes,Liptodes vexillifer
+Animalia,Chordata,Mammalia,Artiodactyla,Eschrichtiidae,Eubalaena and Balaena,Mysticeti
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Lynx,Lynx lynx balcanicus
+Animalia,Chordata,Mammalia,Carnivora,Viverridae,Hemigalus,Hemigalus Derbyanus
+Animalia,Chordata,Mammalia,Peramelemorphia,Peramelidae,Perameles,Perameles
+Animalia,Chordata,Actinopterygii,Cypriniformes,Cyprinidae,Barbus,Barbus Barbus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Strigiformes,Tytonidae,Tyto,Tyto alba
+Animalia,Chordata,Aves,Passeriformes,Hirundinidae,Hirundo,Hirundo rustica
+Animalia,Chordata,Actinopterygii,Perciformes,Sphyraenidae,Sphyraena,Sphyraena
+Animalia,Chordata,Actinopterygii,Perciformes,Latidae,Lates,Lates calcarifer
+Animalia,Chordata,Aves,Strigiformes,Strigidae,Strix,Strix varia
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Chondrichthyes,Lamniformes,Cetorhinidae,Cetorhinus,Cetorhinus Maximus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Chiroptera,Microchiroptera,Emballonuridae,Chiroptera
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus familiaris
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus familiaris
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Ursus,Ursidae
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Reptilia,Squamata,Agamidae,Pogona,Pogona Vitticeps
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Bos x Bison,Bos taurus × Bison bison
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Acipenseriformes,Acipenseridae,Huso,Huso huso
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera Tigris Tigris
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Ovis,Ovis canadensis
+Animalia,Chordata,Mammalia,Peramelemorphia,Thylacomyidae,Macrotis,Macrotis lagotis
+Animalia,Chordata,Mammalia,Carnivora,Viverridae,Arctictis,Arctictis binturong
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Bison,Bison Bison
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Istiophoriformes,Istiophordae,Istiompax,Istiompax Indica
+Animalia,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Diceros,Diceros Bicornis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Arthropoda,Insecta,Hymenoptera,Sphecidae,Sphex,Sphex pensylvanicus
+Animalia,Arthropoda,Arachnida,Araneae,Theridiidae,Latrodectus,Latrodectus
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,Mustela nigripes
+Animalia,Chordata,Actinopterygii,Scorpaeniformes,Psychrolutidae,Psychrolutes,Psychrolutes marcidus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Passeriforme,Cardinalidae,Passerina,Passerina caerulea
+Animalia,Chordata,Reptilia,Squamata,Iguanidae,Cyclura,Cyclura lewisi
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Cyanocitta,Cyanocitta cristata
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Prionace,Prionace glauca
+Animalia,Chordata,Mammalia,Cetacea,Balaenopteridae,Balaenoptera,Balsenoptera musculus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Lynx,Lynx rufus
+Animalia,Chordata,Aves,Passeriformes,Icteridae,Dolichonyx,Dolichonyx oryzivorus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Tragelaphus,Tragelaphus eurycerus
+Animalia,Chordata,Actinopterygii,Scombriformes,Scombridae,Sarda,Sarda
+Animalia,Chordata,Chondrichthyes,Carcharhiniformes,Sphyrnidae,Sphyrna,Sphyrna tiburo
+Animalia,Chordata,Mammalia,Primates,Hominidae,Pan,Pan paniscus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Hominidae,Pongo,Pongo pygmaeus
+Animalia,Chordata,Mammalia,Proboscidea,Elephantidae,Elephas,Elephas maximus borneensis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Cetacea,Delphinidae,Tursiops,Tursiops Truncatus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Amiiformes,Amiidae,Amia,Amia calva
+Animalia,Chordata,Mammalia,Artiodactyla,Balaenidae,Balaena,Balaena mysticetus
+Animalia,Chordata,Reptilia,Testudines,Emydidae,Terrapene,Terrapene carolina
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Reptilia,Squamata,Chamaeleonidae,Brookesia,Brookesia micra
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Ursus,Ursus arctos
+Animalia,Chordata,Mammalia,Carnivora,Hyaenidae,Hyaena,Hyaena brunnea
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivors,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Psittaciformes,Psittacidae,Melopsittacus,Melopsittacus undulatus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Syncerus,Syncerus caffer
+Animalia,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Carcharhinus,Carcharhinus Leucas
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Amphibia,Anura,Ranidae,Lithobates,Lithobates catesbeianus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Reptilia,Squamata,Pythonidae,Python,Python bivittatus
+Animalia,Chordata,Aves,Strigiformes,Strigidae,Athene,Athene cunicularia
+Animalia,Chordata,Mammalia,Rodentia,Cricetidae,Peromyscus,Peromyscus erimicus
+Animalia,Chordata,Amphibia,Gymnophiona,Caecilidae,Caecilia Linnaeus,Apoda
+Animalia,Chordata,Reptilia,Crocodilia,Alligatoridae,Caimaninae,"Caiman crocodilus, Melanosuchus niger, Caiman yacare, Paleosuchus palpebrosus, Paleosuchus trigonatus, Caiman latirostris"
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Camelidae,Camelus,Camelus dromedarius
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Lynx,Lynx canadensis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Equus ferus caballus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera leo melanochaitus
+Animalia,Chordata,Mammalia,Rodentia,Caviidae,Hydrochoerus,Hydrochoerus hydrochaeris
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Caracal,Caracal Caracal
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Rangifer,Rangifer tarandus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Aves,Psittaciformes,Psittacidae,Conuropsis,Conuropsis carolinensis
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Rupicapra,Rupicapra rupicapra
+Animalia,Chordata,Mammalia,Carnivora,Feliformia,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Acinonyx,Acinonyx jubatus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Aves,Galliformes,Phasianidae,Gallus,Gallus gallus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Primates,Hominidae,Pan,Pan troglodytes
+Animalia,Chordata,Mammalia,Rodentia,Chinchillidae,Chinchilla,Chinchilla Lanigera
+Animalia,Chordata,Reptilia,Crocodilia,Alligatoridae,Alligator,Aliigator sinensis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Anseriformes,Anatidae,Anser,Anser cygnoides domesticus
+Animalia,Chordata,Actinopterygii,Acipenseriformes,Polyodontidae,Psephurus,Psephurus gladius
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Pygoscelis,Pygoscelis Antarcticus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Arthropoda,Malacostraca,Decapoda,Gecarcinidae,Gecarcoidea,Gecarcoidea natalis
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Neofelis,Neofelis nebulosa
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Procyonidae,Nasua,Nasua nasua
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Sarcopterygii,Coelacanthiformes,Latimeriidae,Latimeria,Coelacanthiformes
+Animalia,Chordata,Mammalia,Atriodactyla,Tayassuidae,Pecari,Pecari tajacu
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Mollusca,Cephalopoda,Oegopsida,Cranchiidae,Mesonychoteuthis,Mesonychoteuthis hamiltoni
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Buteo,Buteo buteo
+Animalia,Chordata,Amphibia,Anura,Ranidae,Rana,Rana temporaria
+Animalia,Arthropoda,Arachnida,aranae,Theridiidae,Parasteatoda,Parasteatoda tepidariorum
+Animalia,Chordata,Aves,Gaviiformes,Gaviidae,Gavia,Gavia Immer
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,Corvus corax
+Animalia,Chordata,Amphibia,Anura,Bufonidae,Bufo,Bufo Bufo
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Callitrichidae,Saguinus,Saguinus Oedipus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Puma,Felis Concolor
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Bos,Bos Taurus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis latrans
+Animalia,Chordata,Mammalia,Primates,Cercopithecidae,Macaca,Macaca Fascicularis
+Animalia,Chordata,Mammalia,Carnivora,Pinnipedia,Lobodon,Lobodon carcinophaga
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Eudyptes,Eudyptes robustus
+Animalia,Chordata,Reptilia,Crocodilia,Crocodylidae,Crocodylus,Crocodylus acutus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,Vulpes vulpes
+Animalia,Chordata,Mammalia,Primates,Hominidae,Gorilla,Gorilla gorilla diehli
+Animalia,Chordata,Aves,Cuculiformes,Cuculidae,Cuculus,Cuculidae
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Marsupialia,Phalangeridae,Phalanger,Phalanger maculatus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Arthropoda,Insecta,Orthoptera,Acrididae,Schistocerca,Schistocerca gregaria
+Animalia,Chordata,Amphibia,Anura,Brevicipitidae,Breviceps,Breviceps macrops
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Gopherus,Gopherus Agassizii
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Cuon,Cuon alpinus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus Dingo
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Aves,Columbiformes,Columbidae,Raphus,Raphus cucullatus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Equus Asinus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,canis lupus familiaris
+Animalia,Chordata,Reptilia,Squamata,Agamidae,Draco,Draco volans
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Sirenia,Dugongidae,Dugong,Dugong Dugon
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Cetacea,Delphinidae,Lagenorhynchus,Lagenorhynchus obscurus
+Animalia,Annelida,Clitellata,Opisthopora,Limbricidae,Lumbricus Linnaeus,Lumbricina
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Sialia,Sialia sialis
+Animalia,Chordata,Reptilia,Squamata,Phyrnosomatidae,Sceloporus,Sceloporus undulatas
+Animalia,Chordata,Mammalia,Primates,Hominidae,Gorilla,Gorilla berengei
+Animalia,Chordata,Mammalia,Primates,Hominidae,Gorilla,Gorilla Berengei Graueri
+Animalia,Chordata,Aves,Passeriformes,Tyrannidae,Sayornis,Sayornis phoebe
+Animalia,Chordata,Mammalia,Monotremata,Tachyglossidae,Tachyglossus,Tachyglossus Aculeatus
+Animalia,Chordata,Amphibia,Anura,Ranidae,Pelophylax,Pelophylax kl. esculentus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Actinopterygii,Gymnotiformes,Gymnotidae,Electrophorus,Electrophorus Electricus
+Animalia,Chordata,Mammalia,Carnivora,Phocidae,Mirounga,Mirounga
+Animalia,Chordata,Mammalia,Macroscelidea,Macroscelididae,Elephantulus,Elephantulus
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Cervus,Cervus canadensis
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Aptenodytes,Aptenodytes forsteri
+Animalia,Chordata,Mammalia,Primates,Callitrichidae,Saguinus,Saguinus Imperator
+Animalia,Chordata,Aves,Casuariiformes,Casuariidae,Dromaius,Dromaius novaehollandiae
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,Mustela erminea
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Dama,Dama dama
+Animalia,Chordata,Mammalia,Artiodactyla,Delphinidae,Pseudorca,Pseudorca crassidens
+Animalia,Arthropoda,Arachnida, Araneae,Theridiidae,Steatoda,Steatoda grossa
+Animalia,Chordata,Actinopterygii,Beryciformes,Anoplogastridae,Anoplogaster,Anoplogaster
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,Vulpes zerda
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,Mustela furo
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Buteo,Buteo regalis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Cetacea,Balaenopteridae,Balaenoptera,Balaenoptera Physalus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Amphibia,Anura,Bombinatoridae,Bombina,Bombina
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Pekania,Pekania pennanti
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Prionailurus,Prionailurus viverrinus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Lepisosteiformes,Lepisosteidae,Lepisosteus,Lepisosteus platyrhincus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Puma,Puma concolor couguar
+Animalia,Chordata,Actinopterygii,Pleuronectiformes,Paralichthyidae,Paralichthys,Paralichthys
+Animalia,Chordata,Mammalia,Rodentia,Sciuridae,Pteromyini,Pteromyini
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Eupleridae,Cryptoprocta,Cryptoprocta ferox
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,Vulpes vulpes
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Pelecaniformes,Fregatidae,Fregata,Fregata
+Animalia,Chordata,Reptilia,Squamata,Agamidae,Chlamydosaurus,Chlamydosaurus kingii
+Animalia,Chordata,Chondrichthyes,Hexanchiformes,Chlamydoselachidae,Chlamydoselachus,Chlamydoselachus anguineus
+Animalia,Chordata,Mammalia,Carnivora,Otariidae,Arctocephalus,Arctocephalinae
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Spheniscus,Spheniscus Mendiculus
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Chelonoidis,Chelonoidis nigra
+Animalia,Chordata,Mammalia,Carnivora,Viverridae,Genetta,Genetta genetta
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Pygoscelis,Pygoscelis papua
+Animalia,Chordata,Mammalia,Primates,Callitrichidae,Saguinus,Saguinus Geoffroyi
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Reptilia,Crocodilia,Gavialidae,Gavialis,Gavialis gangeticus
+Animalia,Mollusca,Gastropoda,Achatinoidea,Achatinidae,Achatina,Achatina fulica
+Animalia,Chordata,Mammalia,Cingulata,Chlamyphoridae,Priodontes,Priodontes maximus
+Animalia,Mollusca,Bivalvia,Cardiida,Cardiidae,Tridacna,Tridacna gigas
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Ailuropoda,Ailuropoda melanoleuca
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia, Carnivora, Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Hylobatidae,Hylobates,Hylobatidae
+Animalia,Chordata,Reptilia,Squamata,Helodermatidae,Heloderma,Heloderma suspectum
+Animalia,Chordata,Mammalia,Artiodactyla,Giraffidae,Giraffa,Giraffa camelopardalis
+Animalia,Chordata,Reptilia,Squamata,Anguidae,Ophisaurus,Ophisaurus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Callitrichidae,Leontopithecus,Leontopithecus rosalia
+Animalia,Chordata,Aves,Strigiformes,Tytonidae,Tyto,Tyto aurantia
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Passeriformes,Oriolidae,Oriolus,Oriolus oriolus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Chiroptera,Pteropodidae,Acerodon,Acerodon jubatus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Amphibia,Anura,Conrauidae,Conraua,Conraua goliath
+Animalia,Chordata,Mammalia,Rodentia,Geomyidae,Geomys,Geomys bursarius
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Gopherus,Gopherus polyphemus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Passeriformes,Estrildidae,Erythrura,Erythrura gouldiae
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Urocyon,Urocyon cinereoargenteus
+Animalia,Chordata,Amphibia,Anura,Hylidae,Hyla,Hyla versicolor
+Animalia,Chordata,Aves,Pelecaniformes,Ardeidae,Ardea,Ardea herodias
+Animalia,Chordata,Aves,Passeriformes,Tyrannidae,Myiarchus,Myiarchus crinitus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Chondrichthyes,Lamniformes,Lamnidae,Carcharodon,Carcharodon carcharias
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Reptilia,Squamata,Dactyloidae,Anolis,Anolis carolinensis
+Animalia,Chordata,Aves,Coraciiformes,Meropidae,Merops,Merops orientalis
+Animalia,Chordata,Amphibia,Anura,Ranidae,Lithobates,Lithobates clamitans
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Chondrichthyes,Squaliformes,Somniosidae,Somniosus,Somniosus microcephalus
+Animalia,Chordata,Mammalia,Primates,Cheirogaleidae,Microcebus,Microcebus murinus
+Animalia,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Carcharhinus,Carcharhinus Amblyrhynchos
+Animalia,Chordata,Mammalia,Carnivora,Phocidae,Halichoerus,Halichoerus Grypus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Ursus,Ursus Arctos Horriblis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Galliformes,Phasianidae,Tetraoninae,Tetraoninae
+Animalia,Chordata,Mammalia,Rodentia,Caviidae,Cavia,Cavia porcellus
+Animalia,Chordata,Actinopterygii,Cyprinodontiformes,Poeciliidae,Poecilia,Poecilia reticulata
+Animalia,Chordata,Actinopterygii,Gadiformes,Gadidae,Melanogrammus, Melanogrammus aeglefinus
+Animalia,Chordata,Mammalia,Carnivora,Phocidae,Phoca,Phoca vitulina
+Animalia,Chordata,Actinopterygii,Siluriformes,Ariidae,Ariopsis,Ariopsis felis
+Animalia,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,Lepus
+Animalia,Chordata,Mammalia,Carnivora,Phocidae,Pagophilus,Pagophilus groenlandicus
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Harpia,Harpia harpyja
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Corvus,Corvus Hawaiiensis
+Animalia,Chordata,Mammalia,Carnivora,Phocidae,Neomonachus,Neomonachus schauinslandi
+Animalia,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Dynastes,Dynastes hercules
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Bos,Bos Taurus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Artiodactyla,Hippopotamidae,Hippopotamus,Hippopotamus amphibius
+Animalia,Chordata,Mammalia,Chiroptera,Vespertilionidae,Lasiurus,Lasiurus cinereus
+Animalia,Chordata,Mammalia,mam,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Chiroptera,Phyllostomidae,Ectophylla,Ectophylla alba
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Mellivora,Mellivora Capensis
+Animalia,Chordata,Mammalia,Carnivora,Phocidae,Cystophora,Cystophora cristata
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Chondrichthyes,Heterodontiformes,Heterodontidae,Heterodontus,Heterodontus francisci
+Animalia,Chordata,Amphibia,Anura,Leptodactylidae,Ceratophrys,Ceratophrys Ornata
+Animalia,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Equus caballus
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Haemorhous,Haemorhous mexicanus
+Animalia,Chordata,Aves,Passeriformes,Troglodytidae,Troglodytes,Troglodytes aedon
+Animalia,Chordata,Mammalia,Primates,Atelidae,Alouatta,Alouatta
+Animalia,Chordata,Mammalia,Primates,Hominidae,Homo,Homo Sapiens Sapiens
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Spheniscus,Spheniscus humboldti
+Animalia,Mollusca,Cephalopoda,Oegopsida,Ommastrephidae,Dosidicus,Dosidicus gigas
+Animalia,Chordata,Mammalia,Cetacea,Balaenopteridae,Megaptera,Megaptera novaeangliae
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Hyaenidae,Crocuta,Crocuta Crocuta
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Cnidaria,Hydrozoa,Anthoathecata,Oceaniidae,Turritopsis,Turritopsis dohrnii
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Aepyceros,Aepyceros Melampus
+Animalia,Arthropoda,Insecta,Lepidoptera,Saturniidae,Eacles,Eacles imperialis
+Animalia,Chordata,Mammalia,Proboscidea,Elephantidae,Elephas,Elephas maximus indicus
+Animalia,Chordata,Mammalia,Rodentia,Sciuridae,Ratufa,Ratufa indica
+Animalia,Chordata,Mammalia,Rodentia,Sciuridae,Funambulus,Funambulus Palmarum
+Animalia,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Rhinoceros,Rhinoceros Unicornis
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Geochelone,Geochelone elegans
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera Tigris Corbetti
+Animalia,Chordata,Mammalia,Primates,Indriidae,Indri,Indri indri
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Piciformes,Picidae,Campephilus,Campephilus principalis
+Animalia,Chordata,Aves,Charadriiformes,Jacanidae,Jacana Brisson,Jacanidae
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Aureus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera onca
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Herpailurus,Herpailurus yagouaroundi
+Animalia,Arthropoda,Insecta,Coleoptera,Scarabaeidae,Popillia,Popillia japonica
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Cercopithecidae,Macaca,Macaca fuscata
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Rodentia,Sciuridae,Sciurus,Sciurus lis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Rhinoceros,Rhinoceros Sondaicus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Arthropoda,Arachnida,Araneae,Araneidae,Trichonephila,Trichonephila clavata
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Psittaciformes,Nestoridae,Strigops,Strigops habroptilus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Piciformes,Ramphastidae,Ramphastos,Ramphastos sulfuratus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Odocoileus,Odocoileus virginianus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus Hircus
+Animalia,Chordata,Mammalia,Cetacea,Delphinidae,Orcinus,Orcinus orca
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Chordata,Reptilia,Squamata,Elapidae,Ophiophagus,Ophiophagus hannah
+Animalia,Arthropoda,Malacostraca,Decapoda,Lithodidae,Lopholithodes,Lopholithodes Mandtii
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Aptenodytes,Aptenodytes patagonicus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Procyonidae,Potos,Potos flavus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Diprotodontia,Phascolarctidae,Phascolarctos,Phascolarctos cinereus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Leopardus,Leopardus guigna
+Animalia,Chordata,Actinopterygii,Cypriniformes,Cyprinidae,Cyprinus,"Cyprinus rubrofuscus ""koi"""
+Animalia,Chordata,Reptilia,Squamata,Varanidae,Varanus,Varanus komodoensis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Tragelaphus,Tragelaphus Strepsiceros
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Rodentia,Cricetidae,Lemmus,Lemmus Lemmus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera pardus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Prionailurus,Prionailurus bengalensis
+Animalia,Chordata,Reptilia,Squamata,Eublepharidae,Eublepharis,Eublepharis macularius
+Animalia,Chordata,Mammalia,Carnivora,Phocidae,Hydrurga,Hydrurga Leptonyx
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Stigmochelys,Stigmochelys pardalis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera leo × Panthera tigris
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera leo
+Animalia,Chordata,Actinopterygii,Scorpaeniformes,Scorpaenidae,Pterois,Pterois volitans
+Animalia,Chordata,Mammalia,Chiroptera,Vespertilionidae,Myotis,Myotis lucifugus
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Eudyptula,Eudyptula Minor
+Animalia,Chordata,Mammalia,Artiodactyla,Camelidae,Lama,Lama Glama
+Animalia,Chordata,Aves,Casuariiformes,Casuariidae,Casuarius,Casuarius
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Lepisosteiformes,Lepisosteidae,Lepisosteus,Lepisosteus osseus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Lynx,Felis lynx
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Eudyptes,Eudyptes Chrysolophus
+Animalia,Chordata,Aves,Psittaciformes,Psittacidae,Arini,Arini
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus occidentalis
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Spheniscus,Spheniscus magellanicus
+Animalia,Chordata,Aves,Passeriformes,Corvidae,Pica,Pica Pica
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Viverridae,Viverra,Viverra tangalunga
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera Tigris Jacksoni
+Animalia,Chordata,Aves,Anseriformes,Anatidae,Anas,Anas platyrhynchos
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Cnidaria,Hydrozoa,Siphonophorae,Physaliidae,Physalia,Physalia physalis
+Animalia,Hemichordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Cercopithecidae,Mandrillus,Mandrillus Sphinx
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Chrysocyon,Chyrsocyon brachyurus
+Animalia,Chordata,Aves,Ciconiiformes,Ciconiidae,Leptoptilos,Leptoptilos crumenifer
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,Vulpes vulpes
+Animalia,Chordata,Reptilia,Squamata,Iguanidae,Amblyrhynchus,Amblyrhynchus cristatus
+Animalia,Chordata,Amphibia,Anura,Bufonidae,Bufo,Bufo Marinus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra falconeri
+Animalia,Chordata,Amphibia,Anura,Ranidae,Pelophylax,Pelophylax ridibundus
+Animalia,Chordata,Mammalia,Carnivora,Viverridae,Paguma,Paguma larvata
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Herpestidae,Suricata,Suricata suricatta
+Animalia,Chordata,Chondrichthyes,Lamniformes,Megachasmidae,Megachasma,Megachasma pelagios
+Animalia,Chordata,Actinopterygii,Siluriformes,Pangasiidae,Pangasianodon,Pangasianodon gigas
+Animalia,Chordata,Reptilia,Squamata,Anguidae,Abronia,Abronia graminea
+Animalia,Chordata,Mammalia,Chiroptera,Molossidae,Tadarida,Tadarida brasiliensis
+Animalia,Chordata,Reptilia,Squamata,Bipedidae,Bipes,Bipes biporus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Gonorhynchiformes,Chanidae,Chanos,Chanos chanos
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Mustela or Neovison,Mustela lutreola or Neovison vison
+Animalia,Chordata,Mammalia,Cetacea,Balaenopteridae,Balaenoptera,Balaenoptera acutorostrata
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Ictinia,Ictinia mississippiensis
+Animalia,Chordata,Actinopterygii,Cyprinodontiformes,Poeciliidae,Poecilia,Poecilia
+Animalia,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Danaus,Danaus plexippus
+Animalia,Chordata,Mammalia,Carnivora,Herpestidae,Herpestes,Helogale Parvula
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Amphibia,Anura,Leptodactylidae,Eleutherodactylus,Eleutherodactylus iberia
+Animalia,Chordata,Aves,Gruiformes,Rallidae,Gallinula,Gallinula
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Alces,Alces alces
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Passeriformes,Turdidae,Sialia,Sialia currucoides
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Hominidae,Gorilla,Gorilla Berengei Berengei
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Puma,Felis Concolor
+Animalia,Chordata,Aves,Columbiformes,Columbidae,Zenaida,Zenaida macroura
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Amphibia,Urodela,Proteidae,Necturus,Necturus maculosus
+Animalia,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Equus mulus
+Animalia,Chordata,Mammalia,Artiodactyla,Artiodactyla,Ovibos,Ovibos moschatus
+Animalia,Chordata,Mammalia,Rodentia,Cricetidae,Ondatra,Ondatra zibethicus
+Animalia,Chordata,Mammalia,Rodentia,Heterocephalidae,Heterocephalus,Heterocephalus glaber
+Animalia,Chordata,Mammalia,Cetacea,Monodontidae,Monodon,Monodon monoceros
+Animalia,Chordata,Mammalia,Primates,Hominidae,Homo,Homo Sapiens Neanderthalensis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis Catus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Calvo,Capra,Capra aegagrus hircus
+Animalia,Chordata,Reptilia,Crocodilia,Crocodylidae,Crocodylus,Crocodylus niloticus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Ursus,Ursus americanus
+Animalia,Chordata,Reptilia,Squamata,Anguidae,Elgaria,Elgaria coerulea
+Animalia,Chordata,Aves,Passeriformes,Cardinalidae,Cardinalis,Cardinalis cardinalis
+Animalia,Chordata,Mammalia,Carnivora,Pinnipedia,Callorhinus,Callorhinus ursinus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Chordata,Mammalia,Dasyuromorphia,Myrmecobiidae,Myrmecobius,Myrmecobius Fasciatus
+Animalia,Chordata,Chondrichthyes,Orectolobiformes,Ginglymostomatidae,Ginglymostoma,Ginglymostoma cirratum
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Leopardus,Leopardus pardalis
+Animalia,Chordata,Mammalia,Artiodactyla,Giraffidae,Okapia,Okapia johnstoni
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Amphibia,Caudata,Proteidae,Proteus,Proteus anguinus
+Animalia,Chordata,Mammalia,Didelphimorphia,Didelphidae,Didelphis,Didelphis Virginiana
+Animalia,Chordata,Mammalia,Primates,Hominidae,Pongo,"Pongo pygmaeus, Pongo abelii, Pongo tapanuliensis"
+Animalia,Chordata,Actinopterygii,Perciformes,Cichlidae,Astronotus,Astronotus ocellatus
+Animalia,Chordata,Aves,Struthioniformes,Struthionidae,Struthio,Struthio camelus
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Lutra,Lutra Canadensis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Batrachoidiformes,Batrachoididae,Opsanus,Opsanus tau
+Animalia,Chordata,Mammalia,Diprotodontia,Macropodidae,Thylogale,Thylogale
+Animalia,Chordata,Reptilia,Testudines,Emydidae,Chrysemys,Chrysemys picta
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,"Panthera pardus, Panthera onca"
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Psittaciformes,Psittacidae,Forpus,Forpus cyanopygius
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Cercopithecidae,Erythrocebus,Erythrocebus patas
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Arthropoda,Insecta,Lepidoptera,Nymphalidae,Aglais,Aglais io
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Elaphurus,Elaphurus davidianus
+Animalia,Chordata,Aves,Falconiformes,Falconidae,Falco,Falco peregrinus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Galliformes,Phasianidae,Phasianus,Phasianus Colchicus
+Animalia,Chordata,Mammalia,Primates,Callitrichidae,Saguinus,Saguinus bicolor
+Animalia,Chordata,Mammalia,Artiodactyla,Suidae,Sus,Sus scrofa scrofa
+Animalia,Chordata,Mammalia,Lagomorpha,Ochotonidae,Ochotona,Ochotona Minor
+Animalia,Chordata,Actinopterygii,Esociformes,Esocidae,Esox,Esox
+Animalia,Chordata,Aves,Piciformes,Picidae,Dryocopus,Dryocopus pileatus
+Animalia,Chordata,Mammalia,Cingulata,Dasypodidae,Chlamyphorus,Chlamyphorus truncatus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Monotremata,Ornithorhynchidae,Ornithorhynchus,Ornithorhynchus anatinus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Ursus,Ursus maritimus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Arthropoda,Insecta,Lepidoptera,Saturniidae,Antheraea,Antheraea polyphemus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Amphibia,Anura,Ranidae,Pelophylax,Pelophylax lessonae
+Animalia,Chordata,Chondrichthyes,Lamniformes,Lamnidae,Lamna,Lamna nasus
+Animalia,Chordata,Mammalia,Rodentia,Erethizontidae,Erethizon,Erethizon Dorsaum
+Animalia,Chordata,Mammalia,Diprotodontia,Phalangeriformes,Phalangeridae,Phalangeriforme
+Animalia,Chordata,Mammalia,Diprotodontia,Potoroidae,Potorous,Potorous tridactylus
+Animalia,Chordata,Mammalia,Primates,Cercopithecidae,Nasalis,Nasalis larvatus
+Animalia,Chordata,Mammalia,Artiodactyla,Antilocapridae,Antilocapra,Antilocapra americana
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Charadriiformes,Alcidae,Fratercula,Fratercula arctica
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Puma,Felis concolor
+Animalia,Arthropoda,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Haemorhous,Haemorhous purpureus
+Animalia,Arthropoda,Insecta,Lepidoptera,Notodontidae,Cerura,Cerura vinula
+Animalia,Chordata,Mammalia,Artiodactyla,Hippopotamidae,Hippopotamus,Choeropsis liberiensis
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Equus quagga quagga
+Animalia,Chordata,Aves,Galliformes,Phasianidae,Coturnix,Coturnix Coturnix
+Animalia,Chordata,Aves,Trogoniformes,Trogonidae,"Pharomachrus, Euptilotis","Pharomachrus, Euptilotis"
+Animalia,Chordata,Mammalia,Diprotodontia,Macropodidae,Setonix,Setonix brachyurus
+Animalia,Chordata,Mammalia,Dasyuromorphia,Dasyuridae,Dasyurus,Dasyurus Viverrinus
+Animalia,Chordata,Mammalia,Lagomorpha,Leporidae,Oryctolagus,Oryctolagus cuniculus
+Animalia,Chordata,Mammalia,Carnivora,Procyonidae,Procyon,Procyon lotor
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Nyctereutes,Nyctereutes procyonoides
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Astrochelys,Astrochelys radiata
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Rodentia,Muridae,Rattus,Rattus rattus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Passeriformes,Fringillidae,Haemorhous,Haemorhous mexicanus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,Vulpes vulpes
+Animalia,Arthropoda,Arachnida,Araneae,Theraphosidae,Brachypelma,Brachypelma smithi
+Animalia,Chordata,Mammalia,Carnivora,Ailuridae,Ailurus,Ailurus fulgens
+Animalia,Chordata,Mammalia,Rodentia,Sciuridae,Tamiasciurus,Tamiasciurus hudsonicus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus rufus
+Animalia,Chordata,Mammalia,Primates,Callitrichidae,Saguinus,Saguinus midas
+Animalia,Chordata,Aves,Passeriformes,Icteridae,Agelaius,Agelaius phoeniceus
+Animalia,Arthropoda,Arachnida,aranae,Theridiidae,Latrodectus,Latrodectus hasselti
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Rangifer,Rangifer Tarandus
+Animalia,Arthropoda,Malacostraca,Decapoda,Cancridae,Cancer,Cancer productus
+Animalia,Chordata,Mammalia,Hyracoidea,Procaviidae,Procavia,Procavia capensis
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Eudyptes,Eudyptes chrysocome
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Capreolus,Capreolus capreolus
+Animalia,Chordata,Aves,Passeriformes,Carinalidae,Pheucticus,Pheucticus ludovicianus
+Animalia,Chordata,Aves,Ciconiiformes,Threskiornithidae,Ajaja,Ajaja ajaja
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Eudyptes,Eudyptes schlegeli
+Animalia,Chordata,Aves,Apodiformes,Trochilidae,Archilochus,Archilochus colubris
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Agrionemys,Agrionemys horsfieldii
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Capra,Capra aegagrus hircus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Smilodon,Smilodon populator
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Martes,Martes zibellina
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Saiga,Saiga tatarica
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Chondrichthyes,Lamniformes,Lamnidae,Lamna,Lamna ditropis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Reptilia,Squamata,Lacertidae,Lacerta,Lacerta agilis
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Pseudoryx,Pseudoryx nghetinhensis
+Animalia,Chordata,Reptilia,Squamata,Gekkonidae,Uroplatus,Uroplatus phantasticus
+Animalia,Chordata,Mammalia,artiodactyla,Bovidae,Capra,Capra hircus
+Animalia,Chordata,Aves,Psittaciformes,Psittacidae,Ara,Ara macao
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactlya,Bovidae,Oryx,Oryx Dammah
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Amphibia,Anura,Telmatobiidae,Telmatobius,Telmatobius culeus
+Animalia,Chordata,Actinopterygii,Syngnathiformes,Syngnathidae,Phycodurus,Phycodurus eques
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Haliaeetus Savigny,Haliaeetus
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Enhydra,Enhydra Lutris
+Animalia,Mollusca,Gastropoda,Nudibranchia,Opistobranches,Nudibranch,Nudibranchia
+Animalia,Chordata,Actinopterygii,Syngnathiformes,Syngnathidae,Hippocampus,Hippocampus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Cetacea,Balaenopteridae,Balaenoptera,Balaenoptera borealis
+Animalia,Chordata,Aves,Psittaciformes,Psittacidae,Poicephalus,Poicephalus senegalus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Leptailurus,Leptailurus serval
+Animalia,Chordata,Reptilia,Reptilia Order:	Squamata,Colubridae,Contia,Contia tenuis
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Ovis,Ovis aries
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Aves,Pelecaniformes,Balaenicipitidae,Balaeniceps,Balaeniceps rex
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Actinopterygii,Perciformes,Osphronemidae,Betta,Betta splendens
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Cetartiodactyla,Bovidae,Capra,Capra sibirica
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera Tigris Altaica
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Galliformes,Phasianidae,Gallus,Gallus gallus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Scombriformes,Scombridae,Katsuwonus,Katsuwonus pelamis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Pilosa,Bradypodidae,Bradypus,Choloepus Hoffmani
+Animalia,Chordata,Reptilia,Squamata,Anguidae,Anguis,Anguis fragilis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Reptilia,Testudines,Chelydridae,Chelydra,Chelydridae
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus familiaris
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera uncia
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Lagomorpha,Leporidae,Lepus,Lepus americanus
+Animalia,Chordata,Aves,Strigiformes,Strigidae,Bubo,Bubo scandiacus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Aves,Passeriformes,Passerelidae,Melospiza,Melospiza melodia
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera Tigris Amoyensis
+Animalia,Chordata,Amphibia,Mesobatrachia,Pelobatidae,Pelobates,Mesobatrachia
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Calvo,Capra,Capra aegagrus hircus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Tremarctos,Tremarctos Ornatus
+Animalia,Chordata,Mammalia,Cetacea,Physeteridae,Physeter,Physeter macrocephalus
+Animalia,Chordata,Mammalia,Primates,Atelidae,Ateles,Simia Paniscus
+Animalia,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Carcharhinus,Carcharhinus brevipinna
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Chondrichthyes,Squaliformes,Squalidae,Squalus,Squalus acanthias
+Animalia,Chordata,Reptilia,Testudines,Geoemydidae,Heosemys,Heosemys spinosa
+Animalia,Chordata,Aves,Psittaciformes,Psittacidae,Cyanopsitta,Cyanopsitta spixii
+Animalia,Chordata,Actinopterygii,Lepisosteiformes,Lepisosteidae,Lepisosteus,Lepisosteus oculatus
+Animalia,Arthropoda,Insecta,Hemiptera,Fulgoridae,Lycorma,Lycorma delicatula
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Antidorcas,Antidorcas marsupialis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Cebidae,Saimiri,Saimiri
+Animalia,Chordata,Actinopterygii,Beryciformes,Holocentridae,Holocentrus,Holocentrus adscensionis
+Animalia,Chordata,Mammalia,Proboscidea,Elephantidae,Elephas,Elephas Maximus Maximus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Eulipotyphla,Talpidae,Condylura,Condylura cristata
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,Mustela Erminea
+Animalia,Chordata,Mammalia,Carnivora,Hyaenidae,Hyaena,Hyaena hyaena
+Animalia,Chordata,Amphibia,Anura,Hylidae,Litoria,Litoria nasuta
+Animalia,Chordata,Mammalia,Diprotodontia,Petauridae,Petaurus,Petaurus breviceps
+Animalia,Chordata,Reptilia,Testudines,Testudinidae,Centrochelys,Centrochelys sulcata
+Animalia,Chordata,Mammalia,Proboscidea,Elephantidae,Elephas,Elephas Maximus Sumatranus
+Animalia,Chordata,Mammalia,Primates,Hominidae,Pongo,Pongo abelii
+Animalia,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Dicerorhinus,Dicerorhinus Sumatrensis
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera Tigris Sumatrae
+Animalia,Chordata,Mammalia,Carnivora,Ursidae,Helarctos,Helarctos malayanus
+Animalia,Chordata,Actinopterygii,Siluriformes,Pangasiidae,Pangasianodon,Pangasianodon hypophthalmus
+Animalia,Chordata,Aves,Anseriformes,Anatidae,Cygnus,Cygnus atratus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Rodentia,Cricetidae,Mesocricetus,Mesocricetus auratus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Budorcas,Budorcas taxicolor
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Primates,Hominidae,Pongo,Pongo tapanuliensis
+Animalia,Arthropoda,Insecta,Hymenoptera,Pompilidae,Pepsis,Pepsis albocincta
+Animalia,Chordata,Mammalia,Primates,Tarsiidae,Tarsius,Tarsius
+Animalia,Chordata,Mammalia,Dasyuromorphia,Dasyuridae,Sarcophilus,Sarcophilus harrisii
+Animalia,Chordata,Mammalia,Dasyuromorphia,Thylacinidae,Thylacinus,Thylacinus cynocephalus
+Animalia,Chordata,Aves,Strigiformes,Strigidae,Strix,Strix aluco
+Animalia,Chordata,Mammalia,Rodentia,Cricetidae,Mesocricetus,Mesocricetus auratus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Characiformes,Characidae,Paracheirodon,Paracheirodon Axelrodi
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Reptilia,Squamata,Agamidae,Moloch,Moloch horridus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Vulpes,Vulpes ferrilata
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera Tigris
+Animalia,Arthropoda,Insecta,Coleoptera,Carabidae,Cicindela,Cicindelinae
+Animalia,Chordata,Amphibia,Caudata,Ambystomatidae,Ambystoma,Ambystoma tigrinum
+Animalia,Chordata,Chondrichthyes,Carcharhiniformes,Carcharhinidae,Galeocerdo,Galeocerdo Cuvier
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus familiaris
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Passeriformes,Hirundinidae,Tachycineta,Tachycineta bicolor
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Reptilia,Sphenodontia,Sphenodontidae,Sphenodon,Sphenodon Punctatus
+Animalia,Chordata,Aves,Galliformes,Phasianidae,Meleagris,Meleagris
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Felis,Felis catus
+Animalia,Chordata,Mammalia,Primates,Pitheciidae,Cacajao,Cacajao
+Animalia,Chordata,Aves,Passeriformes,Cettiidae,Cettia,Cettia diphone
+Animalia,Chordata,Aves,Passeriformes,Cotingidae,Cephalopterus,Cephalopterus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Mollusca,Cephalopoda,Vampyromorphida,Vampyroteuthidae,Vampyroteuthis,Vampyroteuthis infernalis
+Animalia,Chordata,Mammalia,Artiodactyla,Phocoenidae,Phocoena,Phocoena sinus
+Animalia,Chordata,Mammalia,Primates,Cercopithecidae,Chlorocebus,Chlorocebus pygerythrus
+Animalia,Chordata,Reptilia,Squamata,Sphaerodactylidae,Sphaerodactylus,Sphaerodactylus parthenopion
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Cathartiformes,Cathartidae,Cathartes,Cathartes aura
+Animalia,Chordata,Actinopterygii,Siluriformes,Clariidae,Clarias,Clarias batrachus
+Animalia,Chordata,Mammalia,Diprotodontia,Macropodidae,Macropus,Macropus
+Animalia,Chordata,Actinopterygii,Perciformes,Percidae,Sander,Sander vitreus
+Animalia,Chordata,Mammalia,Carnivora,Odobenidae,Odobenus,Odobenus rosmarus
+Animalia,Chordata,Aves,Procellariiforms,Diomedeidae,Diomedea,Diomedea exulans
+Animalia,Chordata,Mammalia,Artiodactyla,Suidae,Phacochoerus,Phacochoerus africanus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Bubalus,Bubalus bubalis
+Animalia,Chordata,Reptilia,Squamata,Agamidae,Physignathus,Physignathus
+Animalia,Chordata,Mammalia,Rodentia,Cricetidae,Arvicola,Arvicola amphibius
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Mustela,Mustela nivalis
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis Lupus
+Animalia,Chordata,Mammalia,Primates,Hominidae,Gorilla,Gorilla Gorilla
+Animalia,Chordata,Mammalia,Primates,Hominidae,Gorilla,Gorilla gorilla gorilla
+Animalia,Chordata,Chondrichthyes,Orectolobiformes,Rhincodontidae,Rhincodon,Rhincodon Typus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Arthropoda,Insecta,Lepidoptera,Pieridae,Pieris,Pieris rapae
+Animalia,Chordata,Mammalia,Perissodactyla,Rhinocerotidae,Ceratotherium,Ceratotherium simum
+Animalia,Chordata,Mammalia,Carnivora,Felidae,Panthera,Panthera tigris tigris
+Animalia,Chordata,Mammalia,Primates,Cebidae,Cebus,Cebus Capucinus
+Animalia,Chordata,Mammalia,Artiodactyla,Cervidae,Odocoileus,Odocoileus virginianus
+Animalia,Chordata,Aves,Accipitriformes,Accipitridae,Haliaeetus,Haliaeetus albicilla
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Gruiformes,Gruidae,Grus,Grus americana
+Animalia,Chordata,Mammalia,Artiodactyla,Suidae,Sus,Sus scrofa
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Connochaetes,Connochaetes Taurinus
+Animalia,Chordata,Aves,Passeriformes,Phylloscopidae,Phylloscopus,Phylloscopus trochilus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Actinopterygii,Perciformes,Anarhichadidae,Anarrhichthys,Anarrhichthys ocellatus
+Animalia,Chordata,Mammalia,Carnivora,Mustelidae,Gulo,Gulo gulo
+Animalia,Chordata,Mammalia,Diprotodontia,Vombatidae,Vombatus,Vombatus Ursinus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Bison,Bison bison athabascae
+Animalia,Chordata,Amphibia,Anura,Ranidae,Lithobates,Lithobates sylvaticus
+Animalia,Arthropoda,Malacostraca,Isopoda,Armadillidiidae,Armadillidium,Armadillidium vulgare
+Animalia,Arthropoda,Arachnida,Araneae,Dysderidae,Dysdera,Dysdera crocata
+Animalia,Chordata,Mammalia,Proboscidea,Elephantidae,Mammuthus,Mammuthus Primigenius
+Animalia,Chordata,Mammalia,Primates,Atelidae,Lagothrix,Lagothrix Lagotricha
+Animalia,Chordata,Amphibia,Anura,Bufonidae,Anaxyrus,Anaxyrus Baxteri
+Animalia,Chordata,Actinopterygii,Characiformes,Characidae,Pristella,Pristella maxillaris
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Bos,Bos grunniens
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Aves,Sphenisciformes,Spheniscidae,Megadyptes,Megadyptes antipodes
+Animalia,Chordata,Actinopterygii,Scombriformes,Scombridae,Thunnus,Thunnus albacares
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus familiaris
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
+Animalia,Chordata,Mammalia,Perissodactyla,Equidae,Equus,"Equus zebra, Equus quagga, Equus grevyi"
+Animalia,Chordata,Aves,Passeriformes,Estrildidae,Taeniopygia,Taeniopygia guttata
+Animalia,Mollusca,Bivalvia,Myida,Dreissenidae,Dreissena,Dreissena polymorpha
+Animalia,Chordata,Actinopterygii,Siluriformes,Loricariidae,Hypancistrus,Hypancistrus zebra
+Animalia,Chordata,Chondrichthyes,Orectolobiformes,Stegostomatidae,Stegostoma,Stegostoma Fasciatum
+Animalia,Chordata,Mammalia,Artiodactyla,Bovidae,Bos,Bos taurus indicus
+Animalia,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Equus zebra x Equus asinus
+Animalia,Chordata,Mammalia,Perissodactyla,Equidae,Equus,Equus zebra x Equus caballus
+Animalia,Chordata,Mammalia,Carnivora,Canidae,Canis,Canis lupus
