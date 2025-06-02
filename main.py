@@ -10,339 +10,279 @@ import seaborn as sns
 from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
-st.set_page_config(page_title="ESP Intelligence", layout="wide")
+st.set_page_config(page_title="Bio Intelligence Dashboard", layout="wide", page_icon="🧬")
 load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=OPENAI_API_KEY)
+client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
+# Enhanced color scheme for biology
 theme_colors = {
-    "primary": "#1E88E5",   
-    "secondary": "#FF5722", 
-    "success": "#4CAF50",  
-    "warning": "#FFC107",   
-    "danger": "#E53935",   
-    "neutral": "#757575"    
+    "primary": "#2E8B57",      # Sea Green
+    "secondary": "#DAA520",    # Goldenrod
+    "success": "#228B22",      # Forest Green
+    "warning": "#FF8C00",      # Dark Orange
+    "danger": "#DC143C",       # Crimson
+    "neutral": "#708090",      # Slate Gray
+    "plant": "#228B22",        # Forest Green
+    "animal": "#4169E1",       # Royal Blue
+    "biodiversity": "#9932CC"  # Dark Orchid
 }
 
 @st.cache_data
-def load_data():
-    wells = pd.read_csv("data/wells_cleaned.csv")
-    installations = pd.read_csv("data/esp_well_installations_cleaned.csv")
-    failure_cause = pd.read_csv("data/esp_failure_cause_cleaned.csv")
-    
-    date_columns = ['start_date', 'dhp_date', 'pulling_date']
-    for col in date_columns:
-        if col in installations.columns:
-            installations[col] = pd.to_datetime(installations[col], errors='coerce')
-    
-    date_columns = ['installation_date', 'dhp_date', 'pulling_date', 'difa_date']
-    for col in date_columns:
-        if col in failure_cause.columns:
-            failure_cause[col] = pd.to_datetime(failure_cause[col], errors='coerce')
-    
-    merged_data = pd.merge(
-        installations, 
-        failure_cause[['well', 'failure_item', 'failure_item_specific', 'general_failure_cause', 
-                      'specific_failure_cause', 'recommendation', 'dhp_date']], 
-        on=['well', 'dhp_date'], 
-        how='left', 
-        suffixes=('', '_failure')
-    )
-    
-    return wells, installations, failure_cause, merged_data
+def load_biological_data():
+    """Load all biological datasets"""
+    try:
+        # Load animal data
+        animal_files = [f"bio_dataset/animal/animal{i}_cleaned.csv" for i in range(1, 7)]
+        animal_dfs = []
+        for file in animal_files:
+            if os.path.exists(file):
+                df = pd.read_csv(file)
+                df['dataset_source'] = file.split('/')[-1]
+                animal_dfs.append(df)
+        animals_df = pd.concat(animal_dfs, ignore_index=True) if animal_dfs else pd.DataFrame()
+        
+        # Load plant data
+        plants_df = pd.read_csv("bio_dataset/plant/plant1_cleaned.csv") if os.path.exists("bio_dataset/plant/plant1_cleaned.csv") else pd.DataFrame()
+        
+        # Load biodiversity data
+        biodiversity_files = [f"bio_dataset/biodiversity/biodiversity{i}_cleaned.csv" for i in range(1, 3)]
+        biodiversity_dfs = []
+        for file in biodiversity_files:
+            if os.path.exists(file):
+                try:
+                    df = pd.read_csv(file)
+                    df['dataset_source'] = file.split('/')[-1]
+                    biodiversity_dfs.append(df)
+                except Exception as e:
+                    st.warning(f"Could not load {file}: {e}")
+        biodiversity_df = pd.concat(biodiversity_dfs, ignore_index=True) if biodiversity_dfs else pd.DataFrame()
+        
+        return animals_df, plants_df, biodiversity_df
+    except Exception as e:
+        st.error(f"Error loading biological data: {e}")
+        return pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
 
-wells_df, installations_df, failure_cause_df, merged_df = load_data()
-
-def interpret_query(query):
+def interpret_bio_query(query):
+    """Interpret natural language queries about biological data"""
     q = query.lower()
+    
     categories = {
-        "vendor_performance": ["vendor", "pemasok", "penyedia", "supplier", "produsen", "buat", "pabrikan", 
-                              "manufacturer", "maker", "vendor terbaik", "vendor mana", "performa vendor", 
-                              "reliability vendor", "keandalan vendor", "vendor reliability"],
+        "animal_taxonomy": ["animal", "species", "genus", "family", "order", "class", "phylum", 
+                           "taxonomy", "taxonomic", "classification", "mammals", "birds", "fish",
+                           "reptiles", "amphibians", "insects", "vertebrates", "invertebrates"],
         
-        "failure_analysis": ["failure", "gagal", "kerusakan", "rusak", "mode failure", "penyebab gagal", 
-                            "kegagalan", "failure mode", "macet", "dana", "loss", "root cause", 
-                            "akar masalah", "penyebab utama", "failure frequency", "frekuensi kegagalan"],
+        "plant_characteristics": ["plant", "flora", "flower", "bloom", "leaf", "tree", "shrub", 
+                                "herb", "growth", "height", "color", "soil", "light", "habitat",
+                                "perennial", "annual", "deciduous", "evergreen"],
         
-        "area_performance": ["area", "wilayah", "cluster", "zona", "daerah", "lokasi", "tempat", 
-                            "performa area", "area terbaik", "worst area", "area terburuk"],
+        "biodiversity_patterns": ["biodiversity", "diversity", "richness", "abundance", "distribution",
+                                "ecosystem", "habitat", "conservation", "endemic", "native",
+                                "population", "community", "biome"],
         
-        "pump_analysis": ["pump", "pompa", "tipe pompa", "pump type", "jenis pompa", "model pompa", 
-                         "performa pompa", "pump performance", "pump efficiency", "efisiensi pompa"],
+        "ecological_analysis": ["ecology", "environment", "adaptation", "evolution", "genetics",
+                               "behavior", "interaction", "predator", "prey", "symbiosis",
+                               "migration", "reproduction", "lifecycle"],
         
-        "runlife_analysis": ["run life", "umur pakai", "run", "durasi", "waktu operasional", 
-                            "waktu berjalan", "lifetime", "masa pakai", "trend run life", 
-                            "historical run life", "performa jangka panjang"],
+        "comparison_analysis": ["compare", "comparison", "versus", "vs", "difference", "similar",
+                               "related", "relationship", "correlation"],
         
-        "component_analysis": ["failure item", "komponen gagal", "bagian rusak", "komponen", "item gagal", 
-                              "part", "komponen kritis", "critical component", "komponen paling sering rusak"],
+        "geographic_analysis": ["geographic", "location", "region", "continent", "country",
+                               "climate", "temperature", "precipitation", "altitude"],
         
-        "time_analysis": ["trend", "waktu", "time", "period", "periode", "musiman", "seasonal", 
-                         "tahun", "bulan", "year", "month", "historical", "history", "historis", 
-                         "time series", "tren waktu"],
+        "morphological_analysis": ["size", "weight", "length", "structure", "anatomy", "morphology",
+                                  "physical", "characteristics", "features"],
         
-        "cost_analysis": ["cost", "biaya", "pengeluaran", "expenditure", "expense", "cost analysis", 
-                         "analisis biaya", "cost per failure", "cost comparison", "perbandingan biaya", 
-                         "budget", "anggaran", "cost saving", "penghematan"],
-        
-        "technical_specs": ["horsepower", "hp", "daya", "voltase", "volt", "ampere", "amp", "stage", 
-                           "stg", "specs", "spesifikasi", "technical", "teknis", "rpm", "capacity", 
-                           "kapasitas", "psd", "pump setting depth", "kedalaman pompa"],
-        
-        "maintenance_analysis": ["maintenance", "perawatan", "mtbf", "mean time between failure", 
-                               "preventive", "pencegahan", "scheduled", "terjadwal", "repair", 
-                               "perbaikan", "workover", "intervention", "intervensi"],
-        
-        "correlation_analysis": ["correlation", "korelasi", "hubungan", "relationship", "faktor", 
-                                "factors", "affecting", "mempengaruhi", "impact", "dampak", 
-                                "pengaruh", "variables", "variabel"]
+        "conservation_status": ["endangered", "threatened", "extinct", "conservation", "protected",
+                               "rare", "vulnerable", "status", "iucn", "red list"]
     }
     
     for category, keywords in categories.items():
         if any(word in q for word in keywords):
             return category
     
-    if any(word in q for word in ["compare", "comparison", "bandingkan", "perbandingan", "versus", "vs"]):
-        if "vendor" in q or "manufacturer" in q:
-            return "vendor_comparison"
-        elif "area" in q:
-            return "area_comparison"
-        elif "pump" in q or "pompa" in q:
-            return "pump_comparison"
-        else:
-            return "general_comparison"
-    
-    return "wells_info"
+    # Default category based on dataset content
+    if any(word in q for word in ["kingdom", "phylum", "class"]):
+        return "animal_taxonomy"
+    elif any(word in q for word in ["scientific_name", "common_name", "family"]):
+        return "plant_characteristics"
+    else:
+        return "general_biology"
 
-def filter_data(keyword, query=None):
-    if keyword == "vendor_performance":
-        df = installations_df.groupby("vendor").agg({
-            'run': ['mean', 'median', 'std', 'min', 'max', 'count'],
-            'trl': ['mean', 'count']
-        }).reset_index()
-        df.columns = ['vendor', 'run_mean', 'run_median', 'run_std', 'run_min', 'run_max', 'installation_count', 'trl_mean', 'trl_count']
-        df['run_to_trl_ratio'] = df['run_mean'] / df['trl_mean']
-        df['success_rate'] = df['run_mean'] / 365 
-        
-        vendor_failures = failure_cause_df.groupby('manufacture').size().reset_index(name='failure_count')
-        df = pd.merge(df, vendor_failures, left_on='vendor', right_on='manufacture', how='left')
-        df['failure_count'] = df['failure_count'].fillna(0)
-        df['failure_rate'] = df['failure_count'] / df['installation_count']
-        
-        return df, "vendor", "run_mean", "Vendor Performance Analysis"
+def filter_biological_data(keyword, query=None, animals_df=None, plants_df=None, biodiversity_df=None):
+    """Filter and analyze biological data based on query type"""
     
-    elif keyword == "failure_analysis":
-        base_df = failure_cause_df.groupby("failure_mode").size().reset_index(name='count')
-        avg_run = failure_cause_df.groupby("failure_mode")['run'].mean().reset_index()
-        base_df = pd.merge(base_df, avg_run, on="failure_mode", how="left")
-        total_failures = base_df['count'].sum()
-        base_df['percentage'] = (base_df['count'] / total_failures * 100).round(2)
-        item_counts = failure_cause_df.groupby(['failure_mode', 'failure_item']).size().reset_index(name='item_count')
-        return base_df, "failure_mode", "count", "Failure Mode Analysis", item_counts
-    
-    elif keyword == "area_performance":
-        df = installations_df.groupby("area").agg({
-            'run': ['mean', 'median', 'count', 'std'],
-            'well': pd.Series.nunique
-        }).reset_index()
-        df.columns = ['area', 'run_mean', 'run_median', 'installation_count', 'run_std', 'unique_wells']
-        df['failure_rate'] = df['installation_count'] / df['unique_wells']
-        area_failures = failure_cause_df.groupby('area').size().reset_index(name='failure_count')
-        df = pd.merge(df, area_failures, on='area', how='left')
-        df['failure_count'] = df['failure_count'].fillna(0)
+    if keyword == "animal_taxonomy":
+        if animals_df.empty:
+            return pd.DataFrame(), None, None, "No animal data available", None
         
-        return df, "area", "run_mean", "Area Performance Analysis"
-    
-    elif keyword == "pump_analysis":
-        df = installations_df.groupby("pump_type").agg({
-            'run': ['mean', 'median', 'std', 'count'],
-            'well': pd.Series.nunique
-        }).reset_index()
-        df.columns = ['pump_type', 'run_mean', 'run_median', 'run_std', 'count', 'unique_wells']
-        df['installations_per_well'] = df['count'] / df['unique_wells']
-        pump_vendors = installations_df.groupby(['pump_type', 'vendor']).size().reset_index(name='vendor_count')
+        # Analyze taxonomic distribution
+        taxonomy_levels = ['kingdom', 'phylum', 'class', 'order', 'family', 'genus']
+        available_levels = [level for level in taxonomy_levels if level in animals_df.columns]
         
-        return df, "pump_type", "run_mean", "Pump Type Analysis", pump_vendors
-    
-    elif keyword == "runlife_analysis":
-        df = installations_df.copy()
-        bin_edges = [0, 30, 90, 180, 365, 547, 730, 1095, float('inf')]
-        bin_labels = ['0-30 days', '31-90 days', '91-180 days', '6-12 months', '12-18 months', '18-24 months', '24-36 months', '36+ months']
-        df['run_life_category'] = pd.cut(df['run'], bins=bin_edges, labels=bin_labels)
-        run_dist = df['run_life_category'].value_counts().reset_index()
-        run_dist.columns = ['run_life_category', 'count']
-        
-        if 'start_date' in df.columns:
-            df['year'] = df['start_date'].dt.year
-            yearly_runlife = df.groupby('year')['run'].mean().reset_index()
-            yearly_runlife = yearly_runlife.sort_values('year')
-        else:
-            yearly_runlife = None
-        
-        return run_dist, "run_life_category", "count", "Run Life Distribution Analysis", yearly_runlife
-    
-    elif keyword == "component_analysis":
-        base_df = failure_cause_df.groupby("failure_item").size().reset_index(name='count')
-        component_run = failure_cause_df.groupby("failure_item")['run'].agg(['mean', 'median']).reset_index()
-        base_df = pd.merge(base_df, component_run, on="failure_item", how="left")
-        specific_components = failure_cause_df.groupby(['failure_item', 'failure_item_specific']).size().reset_index(name='specific_count')
-        
-        return base_df, "failure_item", "count", "Component Failure Analysis", specific_components
-    
-    elif keyword == "time_analysis":
-        df = installations_df.copy()
-        if 'start_date' in df.columns:
-            df['year'] = df['start_date'].dt.year
-            df['month'] = df['start_date'].dt.month
-            df['quarter'] = df['start_date'].dt.quarter
-            yearly_stats = df.groupby('year').agg({
-                'run': ['mean', 'count'],
-                'well': pd.Series.nunique
-            }).reset_index()
-            yearly_stats.columns = ['year', 'avg_run', 'installation_count', 'unique_wells']
-            monthly_stats = df.groupby(['year', 'month']).size().reset_index(name='count')
+        if available_levels:
+            # Count species by different taxonomic levels
+            analysis_data = []
+            for level in available_levels[:4]:  # Top 4 levels
+                counts = animals_df[level].value_counts().head(10)
+                for category, count in counts.items():
+                    analysis_data.append({
+                        'taxonomic_level': level.title(),
+                        'category': category,
+                        'count': count
+                    })
             
-            return yearly_stats, "year", "avg_run", "Time Trend Analysis", monthly_stats
-        else:
-            return df.head(10), None, None, "Date information not available", None
-    
-    elif keyword == "technical_specs":
-        tech_cols = ['hp', 'volt', 'amp', 'stg', 'psd']
-        available_cols = [col for col in tech_cols if col in installations_df.columns]
-        
-        if available_cols:
-            corr_data = {}
-            for col in available_cols:
-                temp_df = installations_df[[col, 'run']].dropna()
-                if not temp_df.empty:
-                    corr = temp_df.corr().iloc[0, 1]
-                    corr_data[col] = corr
-            corr_df = pd.DataFrame(list(corr_data.items()), columns=['spec', 'correlation_with_runlife'])
-            tech_dist = {}
-            for col in available_cols:
-                if installations_df[col].dtype in [np.float64, np.int64]:
-                    tech_dist[col] = installations_df[col].value_counts().head(10).reset_index()
-                    tech_dist[col].columns = [col, 'count']
+            result_df = pd.DataFrame(analysis_data)
             
-            return corr_df, "spec", "correlation_with_runlife", "Technical Specs Analysis", tech_dist
-        else:
-            return installations_df.head(10), None, None, "Technical specification columns not available", None
-    
-    elif keyword == "correlation_analysis":
-        num_cols = installations_df.select_dtypes(include=[np.number]).columns.tolist()
-        
-        if 'run' in num_cols:
-            num_cols.remove('run') 
-            
-            corr_data = []
-            for col in num_cols:
-                temp_df = installations_df[[col, 'run']].dropna()
-                if not temp_df.empty and temp_df[col].nunique() > 5:  
-                    corr = temp_df.corr().iloc[0, 1]
-                    corr_data.append({'factor': col, 'correlation': corr})
-            
-            corr_df = pd.DataFrame(corr_data)
-            corr_df = corr_df.sort_values('correlation', ascending=False)
-            
-            top_factors = corr_df.head(3)['factor'].tolist()
-            scatter_data = {}
-            for factor in top_factors:
-                scatter_data[factor] = installations_df[[factor, 'run']].dropna().sample(min(500, installations_df.shape[0]))
-            
-            return corr_df, "factor", "correlation", "Correlation Analysis", scatter_data
-        else:
-            return installations_df.head(10), None, None, "Run life data not available for correlation", None
-    
-    elif keyword == "vendor_comparison" or keyword == "area_comparison" or keyword == "pump_comparison" or keyword == "general_comparison":
-        entities = []
-        comparison_col = ""
-        
-        if keyword == "vendor_comparison":
-            comparison_col = "vendor"
-            common_vendors = installations_df['vendor'].value_counts().head(5).index.tolist()
-            for vendor in common_vendors:
-                if vendor.lower() in query.lower():
-                    entities.append(vendor)
-        
-        elif keyword == "area_comparison":
-            comparison_col = "area"
-            common_areas = installations_df['area'].value_counts().head(10).index.tolist()
-            for area in common_areas:
-                if area.lower() in query.lower():
-                    entities.append(area)
-        
-        elif keyword == "pump_comparison":
-            comparison_col = "pump_type"
-            common_pumps = installations_df['pump_type'].value_counts().head(10).index.tolist()
-            for pump in common_pumps:
-                if pump.lower() in query.lower():
-                    entities.append(pump)
-        
-        if not entities and comparison_col:
-            entities = installations_df.groupby(comparison_col)['run'].mean().nlargest(3).index.tolist()
-        
-        if comparison_col:
-            df = installations_df[installations_df[comparison_col].isin(entities)]
-            comparison_metrics = df.groupby(comparison_col).agg({
-                'run': ['mean', 'median', 'std', 'min', 'max', 'count'],
-                'trl': ['mean', 'count'] if 'trl' in df.columns else ['count'],
-                'well': pd.Series.nunique
-            }).reset_index()
-            
-            comparison_metrics.columns = [f"{'' if col[0] == comparison_col else col[0]}{'_' + col[1] if col[1] != '' else ''}" for col in comparison_metrics.columns]
-            return comparison_metrics, comparison_col, "run_mean", f"{comparison_col.title()} Comparison"
-        
-        else:
-            return installations_df.head(10), None, None, "Comparison data not available"
-    
-    elif keyword == "maintenance_analysis":
-        if 'dhp_date' in installations_df.columns and 'pulling_date' in installations_df.columns:
-            df = installations_df.copy()
-            df['intervention_delay'] = (df['pulling_date'] - df['dhp_date']).dt.days
-            delay_by_failure = df.groupby('failure_mode')['intervention_delay'].mean().reset_index()
-            delay_by_area = df.groupby('area')['intervention_delay'].mean().reset_index()
-            
-            if 'start_date' in df.columns:
-                failures_by_well = df.sort_values(['well', 'start_date'])
-                failures_by_well['next_start'] = failures_by_well.groupby('well')['start_date'].shift(-1)
-                failures_by_well['days_to_next_failure'] = (failures_by_well['next_start'] - failures_by_well['start_date']).dt.days
-                mtbf_by_well = failures_by_well.groupby('well')['days_to_next_failure'].mean().reset_index()
-                mtbf_by_well = mtbf_by_well.rename(columns={'days_to_next_failure': 'mtbf_days'})
-                mtbf_by_area = failures_by_well.groupby('area')['days_to_next_failure'].mean().reset_index()
-                mtbf_by_area = mtbf_by_area.rename(columns={'days_to_next_failure': 'mtbf_days'})
+            # Additional analysis: Class distribution
+            if 'class' in animals_df.columns:
+                class_dist = animals_df['class'].value_counts().head(15).reset_index()
+                class_dist.columns = ['class', 'species_count']
                 
-                return mtbf_by_area, "area", "mtbf_days", "Maintenance Analysis", {'delay_by_failure': delay_by_failure, 
-                                                                                  'mtbf_by_well': mtbf_by_well.sort_values('mtbf_days', ascending=False).head(10)}
-            else:
-                return delay_by_failure, "failure_mode", "intervention_delay", "Maintenance Analysis", {'delay_by_area': delay_by_area}
-        else:
-            return installations_df.head(10), None, None, "Maintenance time data not available", None
-    
-    elif keyword == "cost_analysis":
-        df = failure_cause_df.copy()
+                return result_df, "taxonomic_level", "count", "Animal Taxonomic Analysis", class_dist
         
-        cost_by_failure_mode = df.groupby('failure_mode').size().reset_index(name='failure_count')
-        cost_by_failure_mode['est_relative_cost'] = cost_by_failure_mode['failure_count'] * 1000  # Placeholder
-        cost_by_vendor = df.groupby('manufacture').size().reset_index(name='failure_count')
-        cost_by_vendor['est_relative_cost'] = cost_by_vendor['failure_count'] * 1000  # Placeholder
-        cost_by_item = df.groupby('failure_item').size().reset_index(name='failure_count') 
-        cost_by_item['est_relative_cost'] = cost_by_item['failure_count'] * 1000  # Placeholder
-        
-        return cost_by_failure_mode, "failure_mode", "est_relative_cost", "Cost Impact Analysis (Estimated)",  {'cost_by_vendor': cost_by_vendor, 'cost_by_item': cost_by_item}
+        return animals_df.head(20), None, None, "Animal Species Overview", None
     
-    else: 
-        df = wells_df.head(50)
-        return df, None, None, "Wells Information", None
+    elif keyword == "plant_characteristics":
+        if plants_df.empty:
+            return pd.DataFrame(), None, None, "No plant data available", None
+        
+        # Analyze plant characteristics
+        analysis_data = []
+        
+        # Family distribution
+        if 'family' in plants_df.columns:
+            family_counts = plants_df['family'].value_counts().head(10)
+            
+        # Growth habit analysis
+        if 'habit' in plants_df.columns:
+            habit_counts = plants_df['habit'].value_counts()
+            
+        # Bloom period analysis
+        if 'bloom_period' in plants_df.columns:
+            bloom_analysis = plants_df['bloom_period'].value_counts().head(10)
+        
+        # Light requirements
+        if 'light' in plants_df.columns:
+            light_req = plants_df['light'].value_counts()
+            
+        # Create summary dataframe
+        summary_data = []
+        
+        if 'family' in plants_df.columns:
+            for family, count in family_counts.items():
+                summary_data.append({'category': 'Family', 'subcategory': family, 'count': count})
+        
+        if 'habit' in plants_df.columns:
+            for habit, count in habit_counts.items():
+                summary_data.append({'category': 'Growth Habit', 'subcategory': habit, 'count': count})
+                
+        summary_df = pd.DataFrame(summary_data)
+        
+        # Additional data for charts
+        additional_data = {
+            'family_dist': family_counts.reset_index() if 'family' in plants_df.columns else None,
+            'habit_dist': habit_counts.reset_index() if 'habit' in plants_df.columns else None,
+            'light_req': light_req.reset_index() if 'light' in plants_df.columns else None
+        }
+        
+        return summary_df, "category", "count", "Plant Characteristics Analysis", additional_data
+    
+    elif keyword == "biodiversity_patterns":
+        if biodiversity_df.empty:
+            return pd.DataFrame(), None, None, "No biodiversity data available", None
+        
+        # Analyze biodiversity patterns
+        numeric_cols = biodiversity_df.select_dtypes(include=[np.number]).columns.tolist()
+        
+        if numeric_cols:
+            # Create summary statistics
+            summary_stats = biodiversity_df[numeric_cols].describe().round(2)
+            summary_df = summary_stats.T.reset_index()
+            summary_df.rename(columns={'index': 'metric'}, inplace=True)
+            
+            return summary_df, "metric", "mean", "Biodiversity Metrics Summary", None
+        
+        return biodiversity_df.head(20), None, None, "Biodiversity Data Overview", None
+    
+    elif keyword == "comparison_analysis":
+        # Compare different biological datasets
+        comparison_data = []
+        
+        if not animals_df.empty:
+            comparison_data.append({
+                'dataset': 'Animals',
+                'total_records': len(animals_df),
+                'unique_families': animals_df['family'].nunique() if 'family' in animals_df.columns else 0,
+                'data_type': 'Taxonomic'
+            })
+        
+        if not plants_df.empty:
+            comparison_data.append({
+                'dataset': 'Plants',
+                'total_records': len(plants_df),
+                'unique_families': plants_df['family'].nunique() if 'family' in plants_df.columns else 0,
+                'data_type': 'Ecological'
+            })
+        
+        if not biodiversity_df.empty:
+            comparison_data.append({
+                'dataset': 'Biodiversity',
+                'total_records': len(biodiversity_df),
+                'unique_families': 0,  # Will be calculated based on actual columns
+                'data_type': 'Community'
+            })
+        
+        comparison_df = pd.DataFrame(comparison_data)
+        return comparison_df, "dataset", "total_records", "Dataset Comparison", None
+    
+    else:
+        # General overview
+        overview_data = []
+        
+        if not animals_df.empty:
+            overview_data.append({
+                'category': 'Animal Species',
+                'count': len(animals_df),
+                'unique_families': animals_df['family'].nunique() if 'family' in animals_df.columns else 0
+            })
+        
+        if not plants_df.empty:
+            overview_data.append({
+                'category': 'Plant Species',
+                'count': len(plants_df),
+                'unique_families': plants_df['family'].nunique() if 'family' in plants_df.columns else 0
+            })
+        
+        if not biodiversity_df.empty:
+            overview_data.append({
+                'category': 'Biodiversity Records',
+                'count': len(biodiversity_df),
+                'unique_families': 0
+            })
+        
+        overview_df = pd.DataFrame(overview_data)
+        return overview_df, "category", "count", "Biological Data Overview", None
 
-def plot_data(df, plot_type, x_col, y_col, title=None, additional_data=None):
+def create_biological_visualization(df, plot_type, x_col, y_col, title=None, additional_data=None, category="general"):
+    """Create visualizations for biological data"""
     try:
+        # Choose colors based on biological category
+        if category == "plant":
+            color_palette = [theme_colors["plant"], theme_colors["success"], "#90EE90"]
+        elif category == "animal":
+            color_palette = [theme_colors["animal"], "#87CEEB", "#4682B4"]
+        else:
+            color_palette = [theme_colors["primary"], theme_colors["secondary"], theme_colors["biodiversity"]]
+        
         if plot_type == "bar":
             fig = px.bar(
-                df, x=x_col, y=y_col, 
-                title=title or f"{y_col.title()} per {x_col.title()}",
+                df, x=x_col, y=y_col,
+                title=title or f"{y_col.replace('_', ' ').title()} by {x_col.replace('_', ' ').title()}",
                 labels={x_col: x_col.replace('_', ' ').title(), y_col: y_col.replace('_', ' ').title()},
-                color_discrete_sequence=[theme_colors["primary"]]
+                color_discrete_sequence=color_palette
             )
             fig.update_layout(
                 xaxis_tickangle=-45,
@@ -350,361 +290,254 @@ def plot_data(df, plot_type, x_col, y_col, title=None, additional_data=None):
                 height=500
             )
             
-        elif plot_type == "line":
-            fig = px.line(
-                df, x=x_col, y=y_col, 
-                title=title or f"{y_col.title()} per {x_col.title()} (Trend)",
-                labels={x_col: x_col.replace('_', ' ').title(), y_col: y_col.replace('_', ' ').title()},
-                markers=True,
-                color_discrete_sequence=[theme_colors["primary"]]
-            )
-            fig.update_layout(
-                xaxis_tickangle=-45,
-                margin=dict(l=20, r=20, t=50, b=100),
-                height=500
-            )
-            
-        elif plot_type == "pie":
-            fig = px.pie(
-                df, names=x_col, values=y_col,
-                title=title or f"Distribution of {y_col.title()} by {x_col.title()}",
-                hole=0.4,
-                color_discrete_sequence=px.colors.qualitative.Pastel
-            )
-            fig.update_layout(
-                margin=dict(l=20, r=20, t=50, b=20),
-                height=500
-            )
-            
-        elif plot_type == "scatter":
-            if additional_data and isinstance(additional_data, dict) and len(additional_data) > 0:
-                first_key = list(additional_data.keys())[0]
-                scatter_df = additional_data[first_key]
-                fig = px.scatter(
-                    scatter_df, x=first_key, y='run',
-                    title=f"Correlation between {first_key.replace('_', ' ').title()} and Run Life",
-                    labels={first_key: first_key.replace('_', ' ').title(), 'run': 'Run Life (days)'},
-                    trendline="ols",
-                    color_discrete_sequence=[theme_colors["primary"]]
+        elif plot_type == "sunburst":
+            # For taxonomic hierarchy visualization
+            if 'taxonomic_level' in df.columns and 'category' in df.columns:
+                fig = px.sunburst(
+                    df, path=['taxonomic_level', 'category'], values='count',
+                    title=title or "Taxonomic Hierarchy",
+                    color_discrete_sequence=color_palette
                 )
-                fig.update_layout(
-                    height=500,
-                    margin=dict(l=20, r=20, t=50, b=50)
-                )
-            else:
-                fig = px.scatter(
-                    df, x=x_col, y=y_col,
-                    title=title or f"Relationship between {x_col.title()} and {y_col.title()}",
-                    labels={x_col: x_col.replace('_', ' ').title(), y_col: y_col.replace('_', ' ').title()},
-                    color_discrete_sequence=[theme_colors["primary"]]
-                )
-                fig.update_layout(
-                    height=500,
-                    margin=dict(l=20, r=20, t=50, b=50)
-                )
-            
-        elif plot_type == "heatmap":
-            if df.shape[0] > 1 and df.shape[1] > 1:
-                numeric_df = df.select_dtypes(include=[np.number])
-                if numeric_df.shape[1] > 1:
-                    corr_matrix = numeric_df.corr()
-                    
-                    fig = px.imshow(
-                        corr_matrix,
-                        title="Correlation Heatmap",
-                        color_continuous_scale=px.colors.diverging.RdBu_r,
-                        zmin=-1, zmax=1
-                    )
-                    fig.update_layout(
-                        height=600,
-                        margin=dict(l=20, r=20, t=50, b=50)
-                    )
-                else:
-                    return None
             else:
                 return None
                 
-        elif plot_type == "histogram":
-            if y_col in df.columns and df[y_col].dtype in [np.float64, np.int64]:
-                fig = px.histogram(
-                    df, x=y_col,
-                    title=f"Distribution of {y_col.replace('_', ' ').title()}",
-                    labels={y_col: y_col.replace('_', ' ').title()},
-                    color_discrete_sequence=[theme_colors["primary"]]
+        elif plot_type == "treemap":
+            if len(df.columns) >= 3:
+                fig = px.treemap(
+                    df, path=[x_col], values=y_col,
+                    title=title or f"Distribution of {y_col.replace('_', ' ').title()}",
+                    color_discrete_sequence=color_palette
                 )
-                fig.update_layout(
-                    height=500,
-                    margin=dict(l=20, r=20, t=50, b=50)
+            else:
+                return None
+                
+        elif plot_type == "scatter":
+            numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+            if len(numeric_cols) >= 2:
+                fig = px.scatter(
+                    df, x=numeric_cols[0], y=numeric_cols[1],
+                    title=title or f"Relationship between {numeric_cols[0]} and {numeric_cols[1]}",
+                    color_discrete_sequence=color_palette,
+                    hover_data=df.columns.tolist()[:5]
+                )
+            else:
+                return None
+                
+        elif plot_type == "pie":
+            fig = px.pie(
+                df, names=x_col, values=y_col,
+                title=title or f"Distribution of {y_col.replace('_', ' ').title()}",
+                color_discrete_sequence=color_palette
+            )
+            
+        elif plot_type == "heatmap":
+            numeric_df = df.select_dtypes(include=[np.number])
+            if numeric_df.shape[1] > 1:
+                corr_matrix = numeric_df.corr()
+                fig = px.imshow(
+                    corr_matrix,
+                    title=title or "Correlation Heatmap",
+                    color_continuous_scale="RdBu_r",
+                    zmin=-1, zmax=1
                 )
             else:
                 return None
                 
         elif plot_type == "box":
-            if x_col and y_col and y_col in df.columns and df[y_col].dtype in [np.float64, np.int64]:
+            if y_col in df.columns and df[y_col].dtype in [np.float64, np.int64]:
                 fig = px.box(
                     df, x=x_col, y=y_col,
-                    title=f"Distribution of {y_col.replace('_', ' ').title()} by {x_col.replace('_', ' ').title()}",
-                    labels={x_col: x_col.replace('_', ' ').title(), y_col: y_col.replace('_', ' ').title()},
-                    color_discrete_sequence=[theme_colors["primary"]]
-                )
-                fig.update_layout(
-                    height=500,
-                    margin=dict(l=20, r=20, t=50, b=50)
+                    title=title or f"Distribution of {y_col.replace('_', ' ').title()} by {x_col.replace('_', ' ').title()}",
+                    color_discrete_sequence=color_palette
                 )
             else:
                 return None
                 
-        elif plot_type == "multi_bar":
-            if df.shape[1] >= 4: 
-                metrics = [col for col in df.columns if col != x_col and df[col].dtype in [np.float64, np.int64]][:3]  
-                
-                fig = go.Figure()
-                for metric in metrics:
-                    fig.add_trace(go.Bar(
-                        x=df[x_col],
-                        y=df[metric],
-                        name=metric.replace('_', ' ').title()
-                    ))
-                
-                fig.update_layout(
-                    title=title or f"Multiple Metrics by {x_col.title()}",
-                    xaxis_title=x_col.replace('_', ' ').title(),
-                    yaxis_title="Value",
-                    legend_title="Metrics",
-                    height=500,
-                    barmode='group',
-                    margin=dict(l=20, r=20, t=50, b=100)
-                )
-            else:
-                return None
         else:
-            return None
+            # Default to bar chart
+            fig = px.bar(
+                df, x=x_col, y=y_col,
+                title=title or f"{y_col.replace('_', ' ').title()} by {x_col.replace('_', ' ').title()}",
+                color_discrete_sequence=color_palette
+            )
             
         return fig
+        
     except Exception as e:
         st.error(f"Error creating visualization: {e}")
         return None
 
-def generate_secondary_charts(keyword, df, x_col, y_col, additional_data):
+def generate_biological_insights(keyword, df, x_col, y_col, additional_data):
+    """Generate additional charts and insights for biological data"""
     charts = []
     
-    if keyword == "vendor_performance":
-        if "run_to_trl_ratio" in df.columns and "failure_rate" in df.columns:
-            metrics_fig = px.scatter(
-                df, x="failure_rate", y="run_to_trl_ratio", color="vendor",
-                size="installation_count", hover_name="vendor",
-                labels={"failure_rate": "Failure Rate", "run_to_trl_ratio": "Run/Target Ratio", "installation_count": "Number of Installations"},
-                title="Vendor Performance Matrix"
+    if keyword == "animal_taxonomy":
+        # Create phylogenetic diversity chart
+        if additional_data is not None and 'class' in additional_data.columns:
+            class_fig = px.bar(
+                additional_data, x="class", y="species_count",
+                title="Species Count by Animal Class",
+                labels={"class": "Animal Class", "species_count": "Number of Species"},
+                color_discrete_sequence=[theme_colors["animal"]]
             )
-            charts.append(("Vendor Performance Matrix", metrics_fig))
+            class_fig.update_layout(xaxis_tickangle=-45)
+            charts.append(("Species by Animal Class", class_fig))
         
-        if "vendor" in df.columns and "run" in df.columns:
-            run_box_fig = px.box(
-                installations_df[installations_df['vendor'].isin(df['vendor'])], 
-                x="vendor", y="run",
-                title="Distribution of Run Life by Vendor",
-                labels={"vendor": "Vendor", "run": "Run Life (days)"}
+        # Create taxonomic level distribution
+        if 'taxonomic_level' in df.columns:
+            level_dist = df.groupby('taxonomic_level')['count'].sum().reset_index()
+            level_fig = px.pie(
+                level_dist, names='taxonomic_level', values='count',
+                title="Distribution Across Taxonomic Levels",
+                color_discrete_sequence=[theme_colors["animal"], theme_colors["secondary"], theme_colors["success"]]
             )
-            charts.append(("Run Life Distribution by Vendor", run_box_fig))
+            charts.append(("Taxonomic Level Distribution", level_fig))
     
-    elif keyword == "failure_analysis":
-        if 'dhp_date' in failure_cause_df.columns:
-            failure_cause_df['failure_year'] = pd.to_datetime(failure_cause_df['dhp_date']).dt.year
-            time_trend = failure_cause_df.groupby(['failure_year', 'failure_mode']).size().reset_index(name='count')
-            
-            time_fig = px.line(
-                time_trend, x="failure_year", y="count", color="failure_mode",
-                title="Failure Trend Over Time by Failure Mode",
-                labels={"failure_year": "Year", "count": "Number of Failures", "failure_mode": "Failure Mode"}
-            )
-            charts.append(("Failure Trend Over Time", time_fig))
-        
-        if additional_data is not None:
-            comp_fig = px.bar(
-                additional_data, x="failure_mode", y="item_count", color="failure_item",
-                title="Component Breakdown by Failure Mode",
-                labels={"failure_mode": "Failure Mode", "item_count": "Count", "failure_item": "Failed Component"}
-            )
-            charts.append(("Component Breakdown by Failure Mode", comp_fig))
-    
-    elif keyword == "area_performance":
-        if "failure_count" in df.columns and "run_mean" in df.columns:
-            area_matrix_fig = px.scatter(
-                df, x="failure_count", y="run_mean", size="unique_wells", 
-                color="installation_count", hover_name="area",
-                title="Area Performance Matrix",
-                labels={"failure_count": "Number of Failures", "run_mean": "Average Run Life (days)", 
-                       "unique_wells": "Number of Wells"}
-            )
-            charts.append(("Area Performance Matrix", area_matrix_fig))
-        
-        run_box_fig = px.box(
-            installations_df[installations_df['area'].isin(df['area'])], 
-            x="area", y="run",
-            title="Distribution of Run Life by Area",
-            labels={"area": "Area", "run": "Run Life (days)"}
-        )
-        charts.append(("Run Life Distribution by Area", run_box_fig))
-    
-    elif keyword == "pump_analysis":
-        if additional_data is not None:
-            vendor_fig = px.bar(
-                additional_data, x="pump_type", y="vendor_count", color="vendor",
-                title="Vendor Usage by Pump Type",
-                labels={"pump_type": "Pump Type", "vendor_count": "Count", "vendor": "Vendor"}
-            )
-            charts.append(("Vendor Usage by Pump Type", vendor_fig))
-        
-        run_box_fig = px.box(
-            installations_df[installations_df['pump_type'].isin(df['pump_type'])], 
-            x="pump_type", y="run",
-            title="Distribution of Run Life by Pump Type",
-            labels={"pump_type": "Pump Type", "run": "Run Life (days)"}
-        )
-        charts.append(("Run Life Distribution by Pump Type", run_box_fig))
-    
-    elif keyword == "runlife_analysis":
-        if additional_data is not None and additional_data is not False:
-            trend_fig = px.line(
-                additional_data, x="year", y="run",
-                title="Average Run Life Trend Over Years",
-                labels={"year": "Year", "run": "Average Run Life (days)"},
-                markers=True
-            )
-            trend_fig.update_layout(xaxis_type='category')  
-            charts.append(("Run Life Trend Over Time", trend_fig))
-        
-        hist_fig = px.histogram(
-            installations_df, x="run",
-            title="Run Life Distribution",
-            labels={"run": "Run Life (days)"},
-            nbins=30
-        )
-        charts.append(("Run Life Distribution", hist_fig))
-    
-    elif keyword == "component_analysis":
-        if additional_data is not None:
-            top_components = df.sort_values('count', ascending=False)['failure_item'].head(5).tolist()
-            filtered_data = additional_data[additional_data['failure_item'].isin(top_components)]
-            comp_detail_fig = px.bar(
-                filtered_data, x="failure_item", y="specific_count", color="failure_item_specific",
-                title="Detailed Component Failure Breakdown",
-                labels={"failure_item": "Main Component", "specific_count": "Count", 
-                        "failure_item_specific": "Specific Component"}
-            )
-            charts.append(("Detailed Component Breakdown", comp_detail_fig))
-        
-        comp_run_fig = px.bar(
-            df, x="failure_item", y="mean",
-            title="Average Run Life by Failed Component",
-            labels={"failure_item": "Failed Component", "mean": "Average Run Life (days)"}
-        )
-        charts.append(("Run Life by Component", comp_run_fig))
-    
-    elif keyword == "time_analysis":
-        if additional_data is not None:
-            monthly_fig = px.line(
-                additional_data.pivot_table(index='month', columns='year', values='count', aggfunc='sum').reset_index(),
-                x="month", y=additional_data['year'].unique().tolist(),
-                title="Monthly Installation Patterns by Year",
-                labels={"month": "Month", "value": "Number of Installations", "variable": "Year"}
-            )
-            monthly_fig.update_layout(xaxis_type='category')  
-            charts.append(("Monthly Installation Patterns", monthly_fig))
-        
-        if 'start_date' in installations_df.columns:
-            installations_sorted = installations_df.sort_values('start_date')
-            installations_sorted['cumulative_count'] = range(1, len(installations_sorted) + 1)
-            
-            cumulative_fig = px.line(
-                installations_sorted, x="start_date", y="cumulative_count",
-                title="Cumulative ESP Installations Over Time",
-                labels={"start_date": "Date", "cumulative_count": "Total Installations"}
-            )
-            charts.append(("Cumulative Installations", cumulative_fig))
-    
-    elif keyword == "correlation_analysis":
-        num_cols = installations_df.select_dtypes(include=[np.number]).columns.tolist()
-        if len(num_cols) > 1:
-            corr_matrix = installations_df[num_cols].corr()
-            
-            heatmap_fig = px.imshow(
-                corr_matrix,
-                title="Correlation Matrix of ESP Parameters",
-                color_continuous_scale=px.colors.diverging.RdBu_r,
-                zmin=-1, zmax=1
-            )
-            charts.append(("Correlation Matrix", heatmap_fig))
-        
-        if additional_data is not None and isinstance(additional_data, dict):
-            for factor, scatter_df in additional_data.items():
-                scatter_fig = px.scatter(
-                    scatter_df, x=factor, y="run",
-                    title=f"Correlation between {factor.replace('_', ' ').title()} and Run Life",
-                    labels={factor: factor.replace('_', ' ').title(), "run": "Run Life (days)"},
-                    trendline="ols"
+    elif keyword == "plant_characteristics":
+        if additional_data:
+            # Family distribution
+            if additional_data.get('family_dist') is not None:
+                family_fig = px.bar(
+                    additional_data['family_dist'], x='family', y='count',
+                    title="Plant Species by Family",
+                    labels={"family": "Plant Family", "count": "Number of Species"},
+                    color_discrete_sequence=[theme_colors["plant"]]
                 )
-                charts.append((f"{factor.replace('_', ' ').title()} vs Run Life", scatter_fig))
+                family_fig.update_layout(xaxis_tickangle=-45)
+                charts.append(("Species by Plant Family", family_fig))
+            
+            # Growth habit distribution
+            if additional_data.get('habit_dist') is not None:
+                habit_fig = px.pie(
+                    additional_data['habit_dist'], names='habit', values='count',
+                    title="Distribution by Growth Habit",
+                    color_discrete_sequence=[theme_colors["plant"], theme_colors["success"], "#90EE90", "#228B22"]
+                )
+                charts.append(("Growth Habit Distribution", habit_fig))
+            
+            # Light requirements
+            if additional_data.get('light_req') is not None:
+                light_fig = px.bar(
+                    additional_data['light_req'], x='light', y='count',
+                    title="Plants by Light Requirements",
+                    labels={"light": "Light Requirement", "count": "Number of Species"},
+                    color_discrete_sequence=[theme_colors["warning"]]
+                )
+                charts.append(("Light Requirements", light_fig))
+    
+    elif keyword == "biodiversity_patterns":
+        # Create biodiversity metrics visualization
+        if 'mean' in df.columns and 'std' in df.columns:
+            metrics_fig = px.scatter(
+                df, x='mean', y='std', hover_name='metric',
+                title="Biodiversity Metrics: Mean vs Standard Deviation",
+                labels={"mean": "Mean Value", "std": "Standard Deviation"},
+                color_discrete_sequence=[theme_colors["biodiversity"]]
+            )
+            charts.append(("Metrics Scatter Plot", metrics_fig))
     
     return charts
 
-def build_ui():
-    st.title("ESP Intelligence Dashboard")
+def build_biology_dashboard():
+    """Main dashboard interface"""
+    st.title("🧬 Bio Intelligence Dashboard")
+    st.markdown("### Comprehensive Analysis of Biological Data")
     
-    main_tabs = st.tabs(["Data Analysis"])
+    # Load data
+    with st.spinner("Loading biological datasets..."):
+        animals_df, plants_df, biodiversity_df = load_biological_data()
+    
+    # Sidebar for data overview
+    with st.sidebar:
+        st.header("📊 Data Overview")
+        if not animals_df.empty:
+            st.metric("Animal Species", len(animals_df))
+        if not plants_df.empty:
+            st.metric("Plant Species", len(plants_df))
+        if not biodiversity_df.empty:
+            st.metric("Biodiversity Records", len(biodiversity_df))
+        
+        st.divider()
+        st.header("🎯 Quick Filters")
+        dataset_filter = st.selectbox(
+            "Focus on Dataset:",
+            ["All Datasets", "Animals Only", "Plants Only", "Biodiversity Only"]
+        )
+    
+    # Main tabs
+    main_tabs = st.tabs(["🔍 Natural Language Analysis", "📈 Data Explorer", "🌿 Comparative Analysis"])
     
     with main_tabs[0]:
-        st.header("ESP Data Analysis")
+        st.header("Natural Language Biological Analysis")
         
         col1, col2 = st.columns([3, 1])
         with col1:
-            search_method = st.radio("Method:", ["Natural Language Query", "Guided Analysis"], horizontal=True)
+            search_method = st.radio(
+                "Analysis Method:", 
+                ["Natural Language Query", "Guided Analysis"], 
+                horizontal=True
+            )
             
             if search_method == "Natural Language Query":
-                user_query = st.text_input("Ask Anything about ESP:", placeholder="Example: Vendor mana dengan performa terbaik?")
-                st.info("Tips: Pertanyaan spesifik akan memberikan hasil yang lebih baik.")
+                user_query = st.text_input(
+                    "Ask about biological data:",
+                    placeholder="e.g., 'What animals are in the Chordata phylum?' or 'Show me flowering plants by family'"
+                )
+                st.info("💡 Try asking about animal taxonomy, plant characteristics, or biodiversity patterns!")
+                
             else:
-                analysis_type = st.selectbox("Tipe Analisis:", [
-                    "Vendor Performance", "Failure Analysis", "Area Performance", 
-                    "Pump Analysis", "Run Life Analysis", "Component Analysis",
-                    "Time Trend Analysis", "Correlation Analysis", "Technical Specifications"
+                analysis_type = st.selectbox("Analysis Type:", [
+                    "Animal Taxonomy", "Plant Characteristics", "Biodiversity Patterns",
+                    "Ecological Analysis", "Comparison Analysis", "Conservation Status"
                 ])
                 
-                if analysis_type == "Vendor Performance":
-                    selected_vendors = st.multiselect("Pilih Vendor:", installations_df['vendor'].unique())
-                    metric = st.selectbox("Metrik:", ["Run Life", "Failure Rate", "Installation Count"])
-                    user_query = f"Analisis performa vendor untuk {', '.join(selected_vendors) if selected_vendors else 'semua vendor'} berdasarkan {metric}"
-                
-                elif analysis_type == "Failure Analysis":
-                    selected_modes = st.multiselect("Pilih Failure Mode:", failure_cause_df['failure_mode'].unique())
-                    time_period = st.selectbox("Periode Waktu:", ["Semua Waktu", "Tahun Terakhir", "3 Tahun Terakhir", "5 Tahun Terakhir"])
-                    user_query = f"Analisis kegagalan untuk {', '.join(selected_modes) if selected_modes else 'semua mode'} selama {time_period}"
-                
+                if analysis_type == "Animal Taxonomy":
+                    if not animals_df.empty and 'class' in animals_df.columns:
+                        selected_classes = st.multiselect("Animal Classes:", animals_df['class'].unique())
+                        taxonomic_level = st.selectbox("Focus Level:", ["All", "Family", "Order", "Class"])
+                        user_query = f"Show animal taxonomy for {', '.join(selected_classes) if selected_classes else 'all classes'} at {taxonomic_level} level"
+                    else:
+                        user_query = "Show animal taxonomy overview"
+                        
+                elif analysis_type == "Plant Characteristics":
+                    if not plants_df.empty:
+                        if 'habit' in plants_df.columns:
+                            selected_habits = st.multiselect("Growth Habits:", plants_df['habit'].unique())
+                        if 'light' in plants_df.columns:
+                            light_pref = st.selectbox("Light Preference:", ["All"] + list(plants_df['light'].unique()))
+                        user_query = f"Analyze plant characteristics for selected criteria"
+                    else:
+                        user_query = "Show plant characteristics overview"
+                        
                 else:
-                    user_query = f"Analisis {analysis_type.lower()}"
+                    user_query = f"Analyze {analysis_type.lower()}"
         
         with col2:
-            show_raw_data = st.checkbox("Display Raw Data", value=True)
-            enable_ai_analysis = st.checkbox("AI Analysis", value=True)
+            show_raw_data = st.checkbox("Show Raw Data", value=True)
+            enable_ai_analysis = st.checkbox("AI Insights", value=True)
             
             st.divider()
+            chart_type = st.selectbox("Visualization:", [
+                "bar", "pie", "sunburst", "treemap", "scatter", "box", "heatmap"
+            ])
             
-            default_chart = st.selectbox("Default Graph:", ["bar", "line", "pie", "scatter", "box", "histogram", "heatmap", "multi_bar"])
-            color_theme = st.selectbox("Color Scheme:", ["Biru", "Hijau", "Oranye", "Ungu"])
+            color_scheme = st.selectbox("Color Theme:", [
+                "Biological", "Forest", "Ocean", "Autumn"
+            ])
             
-            if color_theme == "Hijau":
-                theme_colors["primary"] = "#4CAF50"
-            elif color_theme == "Oranye":
-                theme_colors["primary"] = "#FF5722"
-            elif color_theme == "Ungu":
-                theme_colors["primary"] = "#9C27B0"
+            if color_scheme == "Forest":
+                theme_colors["primary"] = "#228B22"
+            elif color_scheme == "Ocean":
+                theme_colors["primary"] = "#4169E1"
+            elif color_scheme == "Autumn":
+                theme_colors["primary"] = "#DAA520"
         
         if 'user_query' in locals() and user_query:
-            st.info(f"Menganalisis: **{user_query}**")
+            st.info(f"🔬 Analyzing: **{user_query}**")
             
-            with st.spinner("Memproses data dan menyiapkan visualisasi..."):
-                keyword = interpret_query(user_query)
-                result = filter_data(keyword, user_query)
+            with st.spinner("Processing biological data..."):
+                keyword = interpret_bio_query(user_query)
+                result = filter_biological_data(keyword, user_query, animals_df, plants_df, biodiversity_df)
                 
                 if len(result) == 5:
                     df, x_col, y_col, title, additional_data = result
@@ -712,195 +545,575 @@ def build_ui():
                     df, x_col, y_col, title = result
                     additional_data = None
                 
-                results_tabs = st.tabs(["Visualisi", "Insights", "Data Explorer", "AI Analysis"])
+                # Determine biological category for coloring
+                bio_category = "plant" if "plant" in keyword else "animal" if "animal" in keyword else "general"
                 
-                with results_tabs[0]:
+                analysis_tabs = st.tabs(["📊 Visualizations", "🧠 Insights", "📋 Data Details", "🤖 AI Analysis"])
+                
+                with analysis_tabs[0]:
                     st.subheader(title)
                     
-                    if x_col and y_col:
+                    if x_col and y_col and not df.empty:
                         chart_col1, chart_col2 = st.columns([3, 1])
                         
                         with chart_col2:
-                            chart_type = st.selectbox("Tipe Grafik:", ["bar", "line", "pie", "scatter", "box", "histogram", "heatmap", "multi_bar"], 
-                                                     index=["bar", "line", "pie", "scatter", "box", "histogram", "heatmap", "multi_bar"].index(default_chart))
-                            
-                            if chart_type == "bar" or chart_type == "line":
-                                sort_by = st.selectbox("Urutkan Berdasarkan:", ["Original", "Naik", "Turun"])
-                                if sort_by == "Naik":
-                                    df = df.sort_values(y_col)
-                                elif sort_by == "Turun":
-                                    df = df.sort_values(y_col, ascending=False)
-                            
-                            st.divider()
-                            
                             if y_col in df.columns and df[y_col].dtype in [np.float64, np.int64]:
-                                st.metric("Rata-rata", f"{df[y_col].mean():.2f}")
-                                st.metric("Median", f"{df[y_col].median():.2f}")
-                                st.metric("Minimum", f"{df[y_col].min():.2f}")
-                                st.metric("Maksimum", f"{df[y_col].max():.2f}")
+                                st.metric("Total Count", f"{df[y_col].sum():,}")
+                                st.metric("Average", f"{df[y_col].mean():.1f}")
+                                st.metric("Maximum", f"{df[y_col].max():,}")
+                                
+                                if len(df) > 1:
+                                    st.metric("Diversity Index", f"{len(df):,}")
                         
                         with chart_col1:
-                            fig = plot_data(df, chart_type, x_col, y_col, title, additional_data)
+                            fig = create_biological_visualization(
+                                df, chart_type, x_col, y_col, title, additional_data, bio_category
+                            )
                             if fig:
                                 st.plotly_chart(fig, use_container_width=True)
                             else:
-                                st.error("Tidak dapat membuat visualisasi dengan opsi yang dipilih.")
+                                st.warning("Unable to create selected visualization with current data")
                     else:
-                        st.write(df)
+                        st.dataframe(df, use_container_width=True)
                 
-                with results_tabs[1]:
-                    st.subheader("Insight Tambahan")
+                with analysis_tabs[1]:
+                    st.subheader("🔬 Biological Insights")
                     
                     if x_col and y_col:
-                        charts = generate_secondary_charts(keyword, df, x_col, y_col, additional_data)
+                        charts = generate_biological_insights(keyword, df, x_col, y_col, additional_data)
                         
                         if charts:
                             for i, (chart_title, chart_fig) in enumerate(charts):
-                                if i % 2 == 0:  
+                                if i % 2 == 0:
                                     cols = st.columns(2)
                                 
                                 with cols[i % 2]:
                                     st.subheader(chart_title)
                                     st.plotly_chart(chart_fig, use_container_width=True)
                         else:
-                            st.write("Tidak ada insight tambahan untuk query ini.")
+                            st.info("No additional insights available for this query type")
                     else:
-                        st.write("Tidak ada insight tambahan untuk query ini.")
+                        st.info("Select a query type that generates insights")
                 
-                with results_tabs[2]:
-                    st.subheader("Data Explorer")
-                    explore_tabs = st.tabs(["📋 Tabel Data", "🧮 Statistik Ringkasan", "🔍 Filter & Cari"])
+                with analysis_tabs[2]:
+                    st.subheader("📋 Detailed Data")
                     
-                    with explore_tabs[0]:
-                        if df is not None and show_raw_data:
-                            rows_per_page = st.slider("Baris per halaman", 5, 100, 20)
-                            page = st.number_input("Halaman", min_value=1, max_value=max(1, len(df) // rows_per_page + 1), step=1)
-                            
-                            start_idx = (page - 1) * rows_per_page
-                            end_idx = min(start_idx + rows_per_page, len(df))
-                            
-                            st.dataframe(df.iloc[start_idx:end_idx], use_container_width=True)
-                            st.write(f"Menampilkan {start_idx+1} hingga {end_idx} dari {len(df)} entri")
-                
-                    with explore_tabs[1]:
-                        if df is not None:
-                            numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
-                            if numeric_cols:
-                                st.write("Statistik Ringkasan:")
-                                st.dataframe(df[numeric_cols].describe(), use_container_width=True)
-                            
-                            st.write("Informasi Kolom:")
-                            col_info = pd.DataFrame({
-                                'Kolom': df.columns,
-                                'Tipe': [str(dtype) for dtype in df.dtypes],
-                                'Jumlah Non-Null': df.count(),
-                                'Jumlah Null': df.isna().sum(),
-                                'Nilai Unik': [df[col].nunique() for col in df.columns]
-                            })
-                            st.dataframe(col_info, use_container_width=True)
-                    
-                    with explore_tabs[2]:
-                        if df is not None:
-                            st.write("Filter Data:")
-                            
-                            filter_col1, filter_col2 = st.columns(2)
-                            
-                            with filter_col1:
-                                filter_column = st.selectbox("Pilih Kolom:", df.columns)
-                            
-                            with filter_col2:
-                                if df[filter_column].dtype in [np.float64, np.int64]:
-                                    min_val = float(df[filter_column].min())
-                                    max_val = float(df[filter_column].max())
-                                    filter_range = st.slider("Rentang Nilai:", min_val, max_val, (min_val, max_val))
-                                    filtered_df = df[(df[filter_column] >= filter_range[0]) & (df[filter_column] <= filter_range[1])]
-                                else:
-                                    filter_values = st.multiselect("Pilih Nilai:", df[filter_column].unique())
-                                    if filter_values:
-                                        filtered_df = df[df[filter_column].isin(filter_values)]
-                                    else:
-                                        filtered_df = df
-                            
-                            st.dataframe(filtered_df, use_container_width=True)
-                
-                with results_tabs[3]:
-                    st.subheader("AI Analysis")
-                    
-                    if enable_ai_analysis:
-                        context = f"Tipe Analisis: {keyword}\n"
-                        context += f"Ringkasan data utama:\n{df.describe().to_string()}\n\n"
-                        if keyword == "vendor_performance":
-                            context += "Vendor dengan kinerja terbaik berdasarkan run life:\n"
-                            context += df.sort_values('run_mean', ascending=False).head(3).to_string(index=False)
-                            context += "\n\nVendor dengan jumlah instalasi terbanyak:\n"
-                            context += df.sort_values('installation_count', ascending=False).head(3).to_string(index=False)
+                    if show_raw_data and not df.empty:
+                        # Data filtering and pagination
+                        col1, col2, col3 = st.columns(3)
                         
-                        elif keyword == "failure_analysis":
-                            context += "Distribusi mode kegagalan:\n"
-                            context += df.to_string(index=False)
-                            if additional_data is not None:
-                                context += "\n\nBreakdown komponen:\n"
-                                context += additional_data.head(10).to_string(index=False)
+                        with col1:
+                            rows_per_page = st.slider("Rows per page", 5, 50, 20)
+                        with col2:
+                            page = st.number_input(
+                                "Page", 
+                                min_value=1, 
+                                max_value=max(1, len(df) // rows_per_page + 1), 
+                                step=1
+                            )
+                        with col3:
+                            search_term = st.text_input("Search in data", "")
                         
-                        prompt = f"""Data konteks untuk analisis ESP:
+                        # Apply search filter
+                        filtered_df = df
+                        if search_term:
+                            text_cols = df.select_dtypes(include=['object']).columns
+                            mask = df[text_cols].astype(str).apply(
+                                lambda x: x.str.contains(search_term, case=False, na=False)
+                            ).any(axis=1)
+                            filtered_df = df[mask]
+                        
+                        # Pagination
+                        start_idx = (page - 1) * rows_per_page
+                        end_idx = min(start_idx + rows_per_page, len(filtered_df))
+                        
+                        st.dataframe(filtered_df.iloc[start_idx:end_idx], use_container_width=True)
+                        st.write(f"Showing {start_idx+1} to {end_idx} of {len(filtered_df)} entries")
+                        
+                        # Data summary
+                        if not filtered_df.empty:
+                            st.subheader("Data Summary")
+                            summary_col1, summary_col2 = st.columns(2)
+                            
+                            with summary_col1:
+                                st.write("**Column Information:**")
+                                col_info = pd.DataFrame({
+                                    'Column': filtered_df.columns,
+                                    'Type': [str(dtype) for dtype in filtered_df.dtypes],
+                                    'Non-Null': filtered_df.count(),
+                                    'Unique': [filtered_df[col].nunique() for col in filtered_df.columns]
+                                })
+                                st.dataframe(col_info, use_container_width=True)
+                            
+                            with summary_col2:
+                                numeric_cols = filtered_df.select_dtypes(include=[np.number]).columns.tolist()
+                                if numeric_cols:
+                                    st.write("**Numeric Statistics:**")
+                                    st.dataframe(filtered_df[numeric_cols].describe(), use_container_width=True)
+                
+                with analysis_tabs[3]:
+                    st.subheader("🤖 AI-Powered Analysis")
+                    
+                    if enable_ai_analysis and client:
+                        # Prepare context for AI analysis
+                        context = f"Biological Analysis Type: {keyword}\n"
+                        context += f"Dataset: {title}\n"
+                        context += f"Data Summary:\n{df.describe().to_string() if not df.empty else 'No data available'}\n\n"
+                        
+                        if keyword == "animal_taxonomy":
+                            context += "Focus: Animal taxonomic classification and diversity\n"
+                            if not animals_df.empty:
+                                context += f"Total animal species: {len(animals_df)}\n"
+                                if 'class' in animals_df.columns:
+                                    top_classes = animals_df['class'].value_counts().head(5)
+                                    context += f"Top animal classes: {top_classes.to_string()}\n"
+                        
+                        elif keyword == "plant_characteristics":
+                            context += "Focus: Plant characteristics and ecological requirements\n"
+                            if not plants_df.empty:
+                                context += f"Total plant species: {len(plants_df)}\n"
+                                if 'family' in plants_df.columns:
+                                    top_families = plants_df['family'].value_counts().head(5)
+                                    context += f"Top plant families: {top_families.to_string()}\n"
+                        
+                        elif keyword == "biodiversity_patterns":
+                            context += "Focus: Biodiversity patterns and ecological metrics\n"
+                            if not biodiversity_df.empty:
+                                context += f"Biodiversity records: {len(biodiversity_df)}\n"
+                        
+                        prompt = f"""Biological Data Analysis Context:
                         {context}
                         
-                        Pertanyaan pengguna: {user_query}
+                        User Query: {user_query}
                         
-                        Berikan:
-                        1. Ringkasan singkat temuan utama (3-5 poin)
-                        2. Insight yang dapat ditindaklanjuti berdasarkan data
-                        3. Rekomendasi untuk perbaikan operasional
-                        4. Analisis lanjutan yang disarankan
+                        Please provide:
+                        1. Key biological insights from the data (3-4 bullet points)
+                        2. Ecological significance and patterns
+                        3. Conservation or research implications
+                        4. Recommendations for further analysis
                         
-                        Format respons Anda dalam markdown dan fokus pada nilai bisnis. PENTING: Berikan respons dalam Bahasa Indonesia."""
+                        Format your response in clear sections with headers. Focus on biological accuracy and scientific interpretation. Respond in Indonesian language."""
                         
-                        with st.spinner("Menghasilkan analisis AI..."):
+                        with st.spinner("Generating AI analysis..."):
                             try:
                                 response = client.chat.completions.create(
                                     model="gpt-4o-mini",
                                     messages=[
-                                        {"role": "system", "content": "Anda adalah asisten analisis ESP minyak & gas yang canggih. Berikan insight singkat dan berbasis data dengan fokus pada nilai bisnis dan perbaikan operasional. Selalu berikan respons dalam Bahasa Indonesia."},
+                                        {"role": "system", "content": "Anda adalah seorang ahli biologi dan ekologi yang memberikan analisis mendalam tentang data biologis. Berikan wawasan ilmiah yang akurat dengan fokus pada signifikansi ekologi dan konservasi. Selalu berikan respons dalam Bahasa Indonesia."},
                                         {"role": "user", "content": prompt}
                                     ],
-                                    max_tokens=800,
+                                    max_tokens=1000,
                                     temperature=0.3,
                                 )
                                 answer = response.choices[0].message.content
                                 st.markdown(answer)
                             except Exception as e:
-                                st.error(f"Error menghasilkan analisis AI: {str(e)}")
+                                st.error(f"Error generating AI analysis: {str(e)}")
                                 st.markdown("""
-                                ## Analisis Dasar
+                                ## Analisis Dasar Biologis
                                 
-                                Berdasarkan data, berikut beberapa observasi umum:
+                                Berdasarkan data yang tersedia, berikut beberapa observasi:
                                 
-                                * Data menunjukkan pola yang memerlukan investigasi lebih lanjut
-                                * Pertimbangkan untuk memeriksa trend dari waktu ke waktu untuk insight yang lebih baik
-                                * Cari korelasi antar variabel untuk mengidentifikasi kemungkinan penyebab
+                                * **Keanekaragaman**: Data menunjukkan pola keanekaragaman yang menarik untuk investigasi lebih lanjut
+                                * **Distribusi**: Pola distribusi taksonomi atau ekologi perlu diperiksa lebih mendalam
+                                * **Karakteristik**: Identifikasi karakteristik unik dari kelompok organisme yang dianalisis
+                                * **Konservasi**: Pertimbangkan implikasi konservasi dari pola yang diamati
                                 
-                                Aktifkan API OpenAI untuk analisis yang lebih detail.
+                                Aktifkan API OpenAI untuk analisis AI yang lebih detail.
                                 """)
                     else:
-                        st.info("Aktifkan Analisis AI untuk mendapatkan insight cerdas berdasarkan query Anda.")
+                        st.info("Aktifkan Analisis AI untuk mendapatkan wawasan biologis mendalam")
                         
-                        if x_col and y_col and df[y_col].dtype in [np.float64, np.int64]:
-                            st.write("Ringkasan Statistik Dasar:")
+                        # Basic biological insights without AI
+                        if not df.empty:
+                            st.write("**Ringkasan Biologis:**")
                             
-                            summary_col1, summary_col2 = st.columns(2)
+                            insights_col1, insights_col2 = st.columns(2)
                             
-                            with summary_col1:
-                                st.metric("Rata-rata", f"{df[y_col].mean():.2f}")
-                                st.metric("Median", f"{df[y_col].median():.2f}")
-                                st.metric("Standar Deviasi", f"{df[y_col].std():.2f}")
+                            with insights_col1:
+                                if 'count' in df.columns:
+                                    total_records = df['count'].sum() if df['count'].dtype in [np.int64, np.float64] else len(df)
+                                    st.metric("Total Records", f"{total_records:,}")
+                                
+                                if len(df) > 1:
+                                    st.metric("Diversity Categories", len(df))
                             
-                            with summary_col2:
-                                st.metric("Minimum", f"{df[y_col].min():.2f}")
-                                st.metric("Maksimum", f"{df[y_col].max():.2f}")
-                                st.metric("Jumlah", f"{df[y_col].count()}")
+                            with insights_col2:
+                                if x_col and x_col in df.columns:
+                                    unique_categories = df[x_col].nunique()
+                                    st.metric(f"Unique {x_col.replace('_', ' ').title()}", unique_categories)
+                                
+                                if y_col and y_col in df.columns and df[y_col].dtype in [np.int64, np.float64]:
+                                    avg_value = df[y_col].mean()
+                                    st.metric(f"Average {y_col.replace('_', ' ').title()}", f"{avg_value:.1f}")
     
+    with main_tabs[1]:
+        st.header("📈 Biological Data Explorer")
+        
+        # Dataset selection
+        dataset_tabs = st.tabs(["🐾 Animals", "🌱 Plants", "🌍 Biodiversity"])
+        
+        with dataset_tabs[0]:
+            st.subheader("Animal Dataset Explorer")
+            if not animals_df.empty:
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.metric("Total Animal Species", len(animals_df))
+                    if 'family' in animals_df.columns:
+                        st.metric("Families Represented", animals_df['family'].nunique())
+                
+                with col2:
+                    if 'class' in animals_df.columns:
+                        st.metric("Animal Classes", animals_df['class'].nunique())
+                    if 'phylum' in animals_df.columns:
+                        st.metric("Phyla Represented", animals_df['phylum'].nunique())
+                
+                # Taxonomic breakdown
+                if 'class' in animals_df.columns:
+                    st.subheader("Taxonomic Distribution")
+                    
+                    class_dist = animals_df['class'].value_counts().head(15)
+                    fig = px.bar(
+                        x=class_dist.values, y=class_dist.index,
+                        orientation='h',
+                        title="Animal Species Count by Class",
+                        labels={'x': 'Number of Species', 'y': 'Animal Class'},
+                        color_discrete_sequence=[theme_colors["animal"]]
+                    )
+                    fig.update_layout(height=600)
+                    st.plotly_chart(fig, use_container_width=True)
+                
+                # Interactive filters
+                if 'phylum' in animals_df.columns and 'class' in animals_df.columns:
+                    st.subheader("Interactive Filters")
+                    
+                    filter_col1, filter_col2 = st.columns(2)
+                    with filter_col1:
+                        selected_phylum = st.selectbox(
+                            "Filter by Phylum:", 
+                            ["All"] + list(animals_df['phylum'].unique())
+                        )
+                    
+                    with filter_col2:
+                        if selected_phylum != "All":
+                            filtered_animals = animals_df[animals_df['phylum'] == selected_phylum]
+                            selected_class = st.selectbox(
+                                "Filter by Class:",
+                                ["All"] + list(filtered_animals['class'].unique())
+                            )
+                        else:
+                            selected_class = st.selectbox(
+                                "Filter by Class:",
+                                ["All"] + list(animals_df['class'].unique())
+                            )
+                    
+                    # Apply filters and show results
+                    filtered_df = animals_df
+                    if selected_phylum != "All":
+                        filtered_df = filtered_df[filtered_df['phylum'] == selected_phylum]
+                    if selected_class != "All":
+                        filtered_df = filtered_df[filtered_df['class'] == selected_class]
+                    
+                    if len(filtered_df) < len(animals_df):
+                        st.write(f"Filtered results: {len(filtered_df)} species")
+                        st.dataframe(filtered_df.head(20), use_container_width=True)
+            else:
+                st.warning("No animal data available")
+        
+        with dataset_tabs[1]:
+            st.subheader("Plant Dataset Explorer")
+            if not plants_df.empty:
+                col1, col2 = st.columns(2)
+                
+                with col1:
+                    st.metric("Total Plant Species", len(plants_df))
+                    if 'family' in plants_df.columns:
+                        st.metric("Plant Families", plants_df['family'].nunique())
+                
+                with col2:
+                    if 'habit' in plants_df.columns:
+                        st.metric("Growth Habits", plants_df['habit'].nunique())
+                    if 'duration' in plants_df.columns:
+                        st.metric("Life Cycles", plants_df['duration'].nunique())
+                
+                # Plant characteristics visualization
+                chart_cols = st.columns(2)
+                
+                with chart_cols[0]:
+                    if 'habit' in plants_df.columns:
+                        habit_dist = plants_df['habit'].value_counts()
+                        fig = px.pie(
+                            names=habit_dist.index, values=habit_dist.values,
+                            title="Distribution by Growth Habit",
+                            color_discrete_sequence=[theme_colors["plant"], theme_colors["success"], "#90EE90", "#228B22"]
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
+                
+                with chart_cols[1]:
+                    if 'light' in plants_df.columns:
+                        light_dist = plants_df['light'].value_counts()
+                        fig = px.bar(
+                            x=light_dist.index, y=light_dist.values,
+                            title="Light Requirements Distribution",
+                            labels={'x': 'Light Requirement', 'y': 'Number of Species'},
+                            color_discrete_sequence=[theme_colors["warning"]]
+                        )
+                        fig.update_layout(xaxis_tickangle=-45)
+                        st.plotly_chart(fig, use_container_width=True)
+                
+                # Plant search and filtering
+                st.subheader("Plant Search & Filter")
+                search_col1, search_col2 = st.columns(2)
+                
+                with search_col1:
+                    search_plant = st.text_input("Search plants by name:", "")
+                
+                with search_col2:
+                    if 'habit' in plants_df.columns:
+                        filter_habit = st.selectbox(
+                            "Filter by Growth Habit:",
+                            ["All"] + list(plants_df['habit'].unique())
+                        )
+                
+                # Apply search and filters
+                display_plants = plants_df
+                if search_plant:
+                    mask = plants_df.astype(str).apply(
+                        lambda x: x.str.contains(search_plant, case=False, na=False)
+                    ).any(axis=1)
+                    display_plants = display_plants[mask]
+                
+                if 'filter_habit' in locals() and filter_habit != "All":
+                    display_plants = display_plants[display_plants['habit'] == filter_habit]
+                
+                if len(display_plants) > 0:
+                    st.write(f"Found {len(display_plants)} matching plants")
+                    st.dataframe(display_plants, use_container_width=True)
+                else:
+                    st.warning("No plants match the search criteria")
+            else:
+                st.warning("No plant data available")
+        
+        with dataset_tabs[2]:
+            st.subheader("Biodiversity Dataset Explorer")
+            if not biodiversity_df.empty:
+                st.metric("Total Biodiversity Records", len(biodiversity_df))
+                
+                # Show column information
+                st.subheader("Dataset Structure")
+                col_info = pd.DataFrame({
+                    'Column': biodiversity_df.columns,
+                    'Type': [str(dtype) for dtype in biodiversity_df.dtypes],
+                    'Non-Null Count': biodiversity_df.count(),
+                    'Null Count': biodiversity_df.isnull().sum()
+                })
+                st.dataframe(col_info, use_container_width=True)
+                
+                # Numeric columns analysis
+                numeric_cols = biodiversity_df.select_dtypes(include=[np.number]).columns.tolist()
+                if numeric_cols:
+                    st.subheader("Numeric Data Summary")
+                    selected_numeric = st.multiselect(
+                        "Select numeric columns to analyze:",
+                        numeric_cols,
+                        default=numeric_cols[:5] if len(numeric_cols) > 5 else numeric_cols
+                    )
+                    
+                    if selected_numeric:
+                        summary_stats = biodiversity_df[selected_numeric].describe()
+                        st.dataframe(summary_stats, use_container_width=True)
+                        
+                        # Correlation matrix
+                        if len(selected_numeric) > 1:
+                            st.subheader("Correlation Analysis")
+                            corr_matrix = biodiversity_df[selected_numeric].corr()
+                            fig = px.imshow(
+                                corr_matrix,
+                                title="Correlation Matrix of Biodiversity Metrics",
+                                color_continuous_scale="RdBu_r",
+                                zmin=-1, zmax=1
+                            )
+                            st.plotly_chart(fig, use_container_width=True)
+                
+                # Sample data display
+                st.subheader("Sample Data")
+                sample_size = st.slider("Number of rows to display:", 5, 50, 20)
+                st.dataframe(biodiversity_df.head(sample_size), use_container_width=True)
+            else:
+                st.warning("No biodiversity data available")
+    
+    with main_tabs[2]:
+        st.header("🌿 Comparative Biological Analysis")
+        
+        comparison_tabs = st.tabs(["📊 Dataset Overview", "🔍 Cross-Dataset Analysis", "📈 Diversity Metrics"])
+        
+        with comparison_tabs[0]:
+            st.subheader("Dataset Comparison Overview")
+            
+            # Create comparison metrics
+            comparison_data = []
+            
+            if not animals_df.empty:
+                animal_metrics = {
+                    'Dataset': 'Animals',
+                    'Total Records': len(animals_df),
+                    'Unique Families': animals_df['family'].nunique() if 'family' in animals_df.columns else 0,
+                    'Unique Genera': animals_df['genus'].nunique() if 'genus' in animals_df.columns else 0,
+                    'Data Completeness': f"{(1 - animals_df.isnull().sum().sum() / (len(animals_df) * len(animals_df.columns))) * 100:.1f}%"
+                }
+                comparison_data.append(animal_metrics)
+            
+            if not plants_df.empty:
+                plant_metrics = {
+                    'Dataset': 'Plants',
+                    'Total Records': len(plants_df),
+                    'Unique Families': plants_df['family'].nunique() if 'family' in plants_df.columns else 0,
+                    'Unique Genera': 0,  # Plants dataset doesn't have genus column
+                    'Data Completeness': f"{(1 - plants_df.isnull().sum().sum() / (len(plants_df) * len(plants_df.columns))) * 100:.1f}%"
+                }
+                comparison_data.append(plant_metrics)
+            
+            if not biodiversity_df.empty:
+                biodiversity_metrics = {
+                    'Dataset': 'Biodiversity',
+                    'Total Records': len(biodiversity_df),
+                    'Unique Families': 0,  # Structure varies
+                    'Unique Genera': 0,
+                    'Data Completeness': f"{(1 - biodiversity_df.isnull().sum().sum() / (len(biodiversity_df) * len(biodiversity_df.columns))) * 100:.1f}%"
+                }
+                comparison_data.append(biodiversity_metrics)
+            
+            if comparison_data:
+                comparison_df = pd.DataFrame(comparison_data)
+                
+                # Display metrics
+                metric_cols = st.columns(len(comparison_data))
+                for i, (_, row) in enumerate(comparison_df.iterrows()):
+                    with metric_cols[i]:
+                        st.metric(f"{row['Dataset']} Records", f"{row['Total Records']:,}")
+                        st.metric("Families", f"{row['Unique Families']:,}")
+                        st.metric("Completeness", row['Data Completeness'])
+                
+                # Comparison chart
+                fig = px.bar(
+                    comparison_df, x='Dataset', y='Total Records',
+                    title="Records Count by Dataset",
+                    color='Dataset',
+                    color_discrete_sequence=[theme_colors["animal"], theme_colors["plant"], theme_colors["biodiversity"]]
+                )
+                st.plotly_chart(fig, use_container_width=True)
+        
+        with comparison_tabs[1]:
+            st.subheader("Cross-Dataset Analysis")
+            
+            if not animals_df.empty and not plants_df.empty:
+                st.write("**Family Distribution Comparison**")
+                
+                # Compare family distributions
+                animal_families = animals_df['family'].value_counts().head(10) if 'family' in animals_df.columns else pd.Series()
+                plant_families = plants_df['family'].value_counts().head(10) if 'family' in plants_df.columns else pd.Series()
+                
+                if not animal_families.empty and not plant_families.empty:
+                    comparison_chart_cols = st.columns(2)
+                    
+                    with comparison_chart_cols[0]:
+                        fig_animals = px.bar(
+                            x=animal_families.values, y=animal_families.index,
+                            orientation='h',
+                            title="Top Animal Families",
+                            labels={'x': 'Species Count', 'y': 'Family'},
+                            color_discrete_sequence=[theme_colors["animal"]]
+                        )
+                        st.plotly_chart(fig_animals, use_container_width=True)
+                    
+                    with comparison_chart_cols[1]:
+                        fig_plants = px.bar(
+                            x=plant_families.values, y=plant_families.index,
+                            orientation='h',
+                            title="Top Plant Families",
+                            labels={'x': 'Species Count', 'y': 'Family'},
+                            color_discrete_sequence=[theme_colors["plant"]]
+                        )
+                        st.plotly_chart(fig_plants, use_container_width=True)
+                
+                # Common families analysis
+                if 'family' in animals_df.columns and 'family' in plants_df.columns:
+                    animal_fam_set = set(animals_df['family'].dropna())
+                    plant_fam_set = set(plants_df['family'].dropna())
+                    common_families = animal_fam_set.intersection(plant_fam_set)
+                    
+                    if common_families:
+                        st.write(f"**Families present in both datasets:** {len(common_families)}")
+                        st.write(", ".join(sorted(common_families)))
+                    else:
+                        st.info("No common families found between animal and plant datasets")
+            else:
+                st.info("Both animal and plant datasets are needed for cross-dataset analysis")
+        
+        with comparison_tabs[2]:
+            st.subheader("Diversity Metrics & Analysis")
+            
+            # Calculate diversity indices
+            diversity_metrics = []
+            
+            if not animals_df.empty and 'family' in animals_df.columns:
+                animal_diversity = {
+                    'Dataset': 'Animals',
+                    'Total Species': len(animals_df),
+                    'Family Richness': animals_df['family'].nunique(),
+                    'Genus Richness': animals_df['genus'].nunique() if 'genus' in animals_df.columns else 0,
+                    'Simpson Index (approx)': 1 - ((animals_df['family'].value_counts() / len(animals_df)) ** 2).sum()
+                }
+                diversity_metrics.append(animal_diversity)
+            
+            if not plants_df.empty and 'family' in plants_df.columns:
+                plant_diversity = {
+                    'Dataset': 'Plants', 
+                    'Total Species': len(plants_df),
+                    'Family Richness': plants_df['family'].nunique(),
+                    'Genus Richness': 0,
+                    'Simpson Index (approx)': 1 - ((plants_df['family'].value_counts() / len(plants_df)) ** 2).sum()
+                }
+                diversity_metrics.append(plant_diversity)
+            
+            if diversity_metrics:
+                diversity_df = pd.DataFrame(diversity_metrics)
+                
+                # Display diversity metrics
+                st.dataframe(diversity_df, use_container_width=True)
+                
+                # Diversity comparison chart
+                fig = px.bar(
+                    diversity_df, x='Dataset', y='Family Richness',
+                    title="Family Richness Comparison",
+                    color='Dataset',
+                    color_discrete_sequence=[theme_colors["animal"], theme_colors["plant"]]
+                )
+                st.plotly_chart(fig, use_container_width=True)
+                
+                # Simpson's Diversity Index comparison
+                fig2 = px.bar(
+                    diversity_df, x='Dataset', y='Simpson Index (approx)',
+                    title="Simpson's Diversity Index Comparison",
+                    color='Dataset',
+                    color_discrete_sequence=[theme_colors["animal"], theme_colors["plant"]]
+                )
+                fig2.update_layout(yaxis_range=[0, 1])
+                st.plotly_chart(fig2, use_container_width=True)
+                
+                st.info("""
+                **Diversity Index Interpretation:**
+                - Simpson's Index ranges from 0 to 1
+                - Higher values indicate greater diversity
+                - Values closer to 1 suggest more evenly distributed families
+                """)
+            else:
+                st.warning("Insufficient data for diversity calculations")
+
 def main():
-    build_ui()
+    """Main application entry point"""
+    build_biology_dashboard()
 
 if __name__ == "__main__":
     main()
