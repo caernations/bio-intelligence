@@ -1164,15 +1164,15 @@ def build_enhanced_biology_dashboard():
         
         # NEW: AI Configuration
         st.divider()
-        st.subheader("🤖 AI Configuration")
+        st.subheader("AI Configuration")
         
         ai_enabled = st.checkbox("Enable Direct AI Answers", value=True, help="Always provide comprehensive AI responses alongside dataset analysis")
         integration_analysis = st.checkbox("Enable Integration Analysis", value=True, help="Connect dataset findings with broader biological knowledge")
         
         if not client:
-            st.warning("⚠️ OpenAI API not configured. AI features will be limited.")
+            st.warning("OpenAI API not configured. AI features will be limited.")
         else:
-            st.success("✅ AI features fully enabled")
+            st.success("AI features fully enabled")
         
         # Data quality indicators
         st.divider()
@@ -1211,12 +1211,12 @@ def build_enhanced_biology_dashboard():
     
     # Main analysis interface
     main_tabs = st.tabs([
-        "🔬 Query Analysis", 
-        "📈 Interactive Explorer"
+        "Query Analysis", 
+        "Interactive Explorer"
     ])
     
     with main_tabs[0]:
-        st.header("Natural Language Query Analysis with AI Enhancement")
+        st.header("Natural Language Query Analysis")
         
         # Query input with enhanced features
         col1, col2 = st.columns([3, 1])
@@ -1229,13 +1229,13 @@ def build_enhanced_biology_dashboard():
                 delattr(st.session_state, 'example_query')
             
             user_query = st.text_area(
-                "Enter your biological research question:",
+                "Enter your question:",
                 value=default_query,
                 placeholder="e.g., 'Show me all mammals in the dataset and compare their family diversity' or 'How does photosynthesis work?' or 'What plants need wet soil and bloom in summer?'",
                 height=100
             )
             
-            st.markdown("**🌟 Enhanced Query Features:**")
+            st.markdown("**Enhanced Query Features:**")
             st.markdown("- **Direct AI Answers**: Get comprehensive responses to any biological question")
             st.markdown("- **Dataset Integration**: Combines AI knowledge with your specific data")
             st.markdown("- **Taxonomic queries**: Ask about specific kingdoms, phyla, classes, orders, families")
@@ -1320,24 +1320,24 @@ def build_enhanced_biology_dashboard():
                 
                 # Create main visualization and insights
                 analysis_tabs = st.tabs([
-                    "🤖 Direct AI Answer",  # NEW TAB - Always first
-                    "📊 Dataset Analysis", 
-                    "🔗 Integrated Insights",  # NEW TAB
-                    "📈 Additional Visualizations",
-                    "🔍 Data Explorer"
+                    "Direct AI Answer",  # NEW TAB - Always first
+                    "Dataset Analysis", 
+                    "Integrated Insights",  # NEW TAB
+                    "Additional Visualizations",
+                    "Data Explorer"
                 ])
                 
                 # NEW TAB 1: Direct AI Answer (Always shown)
                 with analysis_tabs[0]:
-                    st.subheader("🧠 Comprehensive AI Response")
+                    st.subheader("Comprehensive AI Response")
                     st.markdown("*Complete biological knowledge and scientific understanding*")
                     
                     if ai_enabled and client:
-                        with st.spinner("🤖 Generating comprehensive AI response..."):
+                        with st.spinner("Generating comprehensive AI response..."):
                             ai_answer = generate_direct_ai_answer(user_query, client)
                             
                             # Display AI answer with enhanced formatting
-                            st.markdown("### 📚 Scientific Answer")
+                            st.markdown("### Scientific Answer")
                             st.markdown(ai_answer)
                             
                             # Store AI answer for integration
@@ -1409,12 +1409,12 @@ def build_enhanced_biology_dashboard():
                                 client
                             )
                             
-                            st.markdown("### 🎯 Integrated Scientific Analysis")
+                            st.markdown("### Integrated Scientific Analysis")
                             st.markdown(integration_response)
                             
                             # Add synthesis summary
                             st.markdown("---")
-                            st.markdown("### 📋 Analysis Summary")
+                            st.markdown("### Analysis Summary")
                             
                             summary_cols = st.columns(2)
                             
@@ -1430,7 +1430,7 @@ def build_enhanced_biology_dashboard():
                                     st.markdown("- Broader analysis scope")
                             
                             with summary_cols[1]:
-                                st.markdown("**🧠 AI Knowledge Contribution:**")
+                                st.markdown("**AI Knowledge Contribution:**")
                                 st.markdown("- Comprehensive scientific background")
                                 st.markdown("- Current research findings")
                                 st.markdown("- Practical applications")
